@@ -20,8 +20,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["jest", "node"]
   },
+  "compileOnSave": false,
   "include": [
     "next-env.d.ts",
     "**/*.ts",
