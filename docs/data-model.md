@@ -44,6 +44,17 @@ type WeekPage = {
   teamId: string
   weekKey: string
 }
+
+// 실시간 커서 데이터 (RTDB: cursors/{teamId}/{userId})
+type CursorData = {
+  teamId: string
+  userId: string
+  name: string
+  avatar: string
+  x: number    // 뷰포트 너비 기준 % (0–100)
+  y: number    // 뷰포트 높이 기준 % (0–100)
+  updatedAt: number  // epoch ms
+}
 ```
 
 ## Firestore 컬렉션 구조

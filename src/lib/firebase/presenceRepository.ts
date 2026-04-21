@@ -1,34 +1,45 @@
-import {
-  doc, setDoc, deleteDoc, collection,
-  query, where, onSnapshot, type Unsubscribe,
-} from 'firebase/firestore'
-import { db } from './config'
-import { buildPresenceData, isPresenceActive, type PresenceData } from '@/lib/utils/presence'
+import { ref, set, remove, onValue, onDisconnect, type Unsubscribe } from 'firebase/database'
+import { rtdb } from './config'
 import type { User } from '@/types'
 
-export type { PresenceData }
-export { buildPresenceData, isPresenceActive }
+export type PresenceData = {
+  teamId: string
+  userId: string
+  name: string
+  avatar: string
+  lastSeen: number
+}
 
-const COL = 'presence'
+// RTDB 경로: presence/{teamId}/{userId}
 
 export async function setPresence(teamId: string, user: User): Promise<void> {
-  const id = `${teamId}_${user.id}`
-  await setDoc(doc(db, COL, id), buildPresenceData(teamId, user))
+  const presenceRef = ref(rtdb, `presence/${teamId}/${user.id}`)
+  const data: PresenceData = {
+    teamId,
+    userId: user.id,
+    name: user.name,
+    avatar: user.avatar,
+    lastSeen: Date.now(),
+  }
+  onDisconnect(presenceRef).remove()
+  await set(presenceRef, data)
 }
 
 export async function removePresence(teamId: string, userId: string): Promise<void> {
-  await deleteDoc(doc(db, COL, `${teamId}_${userId}`))
+  await remove(ref(rtdb, `presence/${teamId}/${userId}`))
 }
 
 export function subscribeToPresence(
   teamId: string,
   onUpdate: (users: PresenceData[]) => void
 ): Unsubscribe {
-  const q = query(collection(db, COL), where('teamId', '==', teamId))
-  return onSnapshot(q, (snap) => {
-    const active = snap.docs
-      .map((d) => d.data() as PresenceData)
-      .filter((p) => isPresenceActive(p.lastSeen))
-    onUpdate(active)
+  const presenceRef = ref(rtdb, `presence/${teamId}`)
+  return onValue(presenceRef, (snap) => {
+    if (!snap.exists()) {
+      onUpdate([])
+      return
+    }
+    const users = Object.values(snap.val() as Record<string, PresenceData>)
+    onUpdate(users)
   })
 }

@@ -45,3 +45,34 @@ tasks: 해당 teamId의 멤버만 읽기/쓰기
 teams: 멤버만 읽기, 생성자만 수정/삭제
 users: 본인만 수정
 ```
+
+---
+
+# Realtime Database 경로 설계
+
+## presence/{teamId}/{userId}
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| teamId | string | 팀 ID |
+| userId | string | 유저 ID |
+| name | string | 표시 이름 |
+| avatar | string | 아바타 ID |
+| lastSeen | number | 입장 시각 (epoch ms) |
+
+> `onDisconnect().remove()` — 연결 끊김 시 자동 삭제 (하트비트 불필요)
+
+## cursors/{teamId}/{userId}
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| teamId | string | 팀 ID |
+| userId | string | 유저 ID |
+| name | string | 표시 이름 |
+| avatar | string | 아바타 ID (커서 색상 결정) |
+| x | number | 뷰포트 X 위치 (0–100%) |
+| y | number | 뷰포트 Y 위치 (0–100%) |
+| updatedAt | number | 마지막 갱신 시각 (epoch ms) |
+
+> `onDisconnect().remove()` — 퇴장 시 자동 삭제  
+> 10초간 미갱신 시 클라이언트에서 stale 필터링

@@ -134,3 +134,21 @@
 - [x] `TeamHeader` 태그 관리 버튼 (Tags 아이콘)
 - [x] `TeamPage` 전체 연결 및 태그 저장 핸들러
 - [x] TDD: PriorityTagManager 인터랙션 테스트
+
+### Queue 15: 실시간 커서 공유
+
+**목적**  
+팀 페이지(/team/:id)에서 동시 접속 중인 팀원의 마우스 위치를 이름 태그로 표시
+
+**동작 방식**
+- 마우스 이동 이벤트를 50ms 쓰로틀링 후 RTDB `cursors/{teamId}/{userId}` 에 저장
+- 위치값은 뷰포트 비율(%)로 저장 → 화면 크기 차이 무관
+- 10초간 미갱신 커서는 stale로 간주하여 화면에서 제거
+- 페이지 이탈 시 해당 유저의 커서 문서 즉시 삭제
+
+**구현 목록**
+- [x] `cursorRepository.ts` — `updateCursor`, `removeCursor`, `subscribeToCursors`
+- [x] `useCursor.ts` — mousemove 감지 + 쓰로틀 + Firebase 동기화 훅
+- [x] `CursorOverlay.tsx` — 타인 커서를 화살표 + 이름 태그로 렌더링 (pointer-events: none)
+- [x] `TeamPage` 에 `useCursor` 훅 + `CursorOverlay` 통합
+- [x] RTDB 스키마 문서화 (`cursors/{teamId}/{userId}`, `presence/{teamId}/{userId}`)

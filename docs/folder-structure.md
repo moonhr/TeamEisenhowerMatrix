@@ -33,6 +33,7 @@ src/
       MatrixTaskCard.tsx / DraggableMatrixTaskCard.tsx
       DroppableQuadrant.tsx
       OnlineUsersBar.tsx
+      CursorOverlay.tsx         # 실시간 타인 커서 오버레이 (이름 태그 포함)
       PreviousWeekModal.tsx
     my/                       # 마이페이지 컴포넌트
       DisplayNameForm.tsx
@@ -46,6 +47,7 @@ src/
   hooks/
     useRealtimeTasks.ts       # Firestore onSnapshot → Zustand 동기화
     usePresence.ts            # 팀 페이지 접속 유저 presence
+    useCursor.ts              # 마우스 위치 추적 + Firebase 동기화 (50ms 쓰로틀)
     useMyTeams.ts             # 현재 유저의 팀 목록 조회
 
   lib/
@@ -54,6 +56,7 @@ src/
       teamRepository.ts       # 팀 CRUD (createTeam, getTeam, deleteTeam, leaveTeam 등)
       taskRepository.ts       # 태스크 CRUD + onSnapshot 구독
       presenceRepository.ts   # presence 상태 관리
+      cursorRepository.ts     # 실시간 커서 위치 저장/구독 (cursors 컬렉션)
       converters.ts           # Firestore ↔ 타입 변환
     utils/
       week.ts                 # weekKey 계산, 변환, 이전 주차 목록

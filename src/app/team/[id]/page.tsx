@@ -16,10 +16,12 @@ import { useRealtimeTasks } from '@/hooks/useRealtimeTasks'
 import { usePresence } from '@/hooks/usePresence'
 import PriorityTagManager from '@/components/team/PriorityTagManager'
 import TaskEditModal from '@/components/team/TaskEditModal'
+import CursorOverlay from '@/components/team/CursorOverlay'
 import { getTeam, updatePriorityTags } from '@/lib/firebase/teamRepository'
 import * as taskRepo from '@/lib/firebase/taskRepository'
 import { DEFAULT_PRIORITY_TAGS } from '@/lib/priority-tags'
 import { useCurrentUser } from '@/lib/auth'
+import { useCursor } from '@/hooks/useCursor'
 import { getUsers } from '@/lib/firebase/userRepository'
 import type { MatrixPosition, PriorityTag, Task, Team, User } from '@/types'
 
@@ -58,6 +60,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
 
   useRealtimeTasks(id, weekKey)
   const { onlineUsers: presenceList } = usePresence(id, currentUser)
+  const { remoteCursors } = useCursor(id, currentUser)
 
   const weekTasks = getTasksByWeek(id, weekKey)
   const onlineUsers = presenceList.length > 0
@@ -221,6 +224,8 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
         onDelete={handleDeleteTask}
         onClose={() => setEditingTask(null)}
       />
+
+      <CursorOverlay cursors={remoteCursors} />
 
       <PriorityTagManager
         open={tagModalOpen}
