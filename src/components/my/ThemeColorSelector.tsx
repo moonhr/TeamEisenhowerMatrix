@@ -29,7 +29,7 @@ export default function ThemeColorSelector({ selected, onChange }: ThemeColorSel
             aria-pressed={selected === value}
             onClick={() => onChange(value)}
             className={cn(
-              'h-8 w-8 rounded-full transition-all',
+              'h-12 w-12 rounded-full transition-all',
               bg,
               selected === value
                 ? 'ring-2 ring-offset-2 ring-foreground scale-110'

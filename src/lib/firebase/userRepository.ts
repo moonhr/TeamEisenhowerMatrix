@@ -1,4 +1,4 @@
-import { doc, getDoc, getDocs, setDoc, updateDoc, collection, query, where } from 'firebase/firestore'
+import { doc, getDoc, getDocs, setDoc, updateDoc, collection, query, where, documentId } from 'firebase/firestore'
 import { db } from './config'
 import { toUser } from './converters'
 import type { User } from '@/types'
@@ -29,7 +29,7 @@ export async function getUsers(userIds: string[]): Promise<User[]> {
   for (let i = 0; i < userIds.length; i += 30) chunks.push(userIds.slice(i, i + 30))
   const results: User[] = []
   for (const chunk of chunks) {
-    const snap = await getDocs(query(collection(db, COL), where('__name__', 'in', chunk)))
+    const snap = await getDocs(query(collection(db, COL), where(documentId(), 'in', chunk)))
     snap.forEach((d) => results.push(toUser(d.id, d.data())))
   }
   return results

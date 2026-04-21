@@ -13,13 +13,14 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/lib/auth'
 import { AVATARS } from '@/lib/mock-data'
 import { getTeamsByUser, deleteTeam, leaveTeam, renameTeam } from '@/lib/firebase/teamRepository'
-import { updateUser } from '@/lib/firebase/userRepository'
-import type { Team, ThemeColor, ColorScheme } from '@/types'
+import { updateUser, getUsers } from '@/lib/firebase/userRepository'
+import type { Team, ThemeColor, ColorScheme, User } from '@/types'
 
 export default function MyPage() {
   const { currentUser, setCurrentUser, signOut } = useAuth()
   const router = useRouter()
   const [teams, setTeams] = useState<Team[]>([])
+  const [memberMap, setMemberMap] = useState<Map<string, User>>(new Map())
   const [loadingTeams, setLoadingTeams] = useState(true)
   const [renamingTeam, setRenamingTeam] = useState<Team | null>(null)
 
@@ -33,7 +34,13 @@ export default function MyPage() {
   useEffect(() => {
     if (!currentUser) { router.replace('/'); return }
     setLoadingTeams(true)
-    getTeamsByUser(currentUser.id).then((data) => { setTeams(data); setLoadingTeams(false) })
+    getTeamsByUser(currentUser.id).then(async (data) => {
+      setTeams(data)
+      const allIds = [...new Set(data.flatMap((t) => t.memberIds))]
+      const users = await getUsers(allIds)
+      setMemberMap(new Map(users.map((u) => [u.id, u])))
+      setLoadingTeams(false)
+    })
   }, [currentUser?.id])
 
   const handleRename = async (teamId: string, name: string) => {
@@ -105,6 +112,7 @@ export default function MyPage() {
           <div className="border-t" />
           <TeamManagement
             teams={teams}
+            memberMap={memberMap}
             loading={loadingTeams}
             currentUserId={currentUser?.id ?? ''}
             onRename={(id) => setRenamingTeam(teams.find((t) => t.id === id) ?? null)}

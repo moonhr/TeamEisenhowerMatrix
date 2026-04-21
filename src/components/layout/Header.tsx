@@ -10,6 +10,15 @@ import { useMyTeams } from '@/hooks/useMyTeams'
 import { useSearch } from '@/hooks/useSearch'
 import SearchDropdown from './SearchDropdown'
 
+const THEME_BG: Record<string, string> = {
+  violet: 'bg-violet-500',
+  blue:   'bg-blue-500',
+  green:  'bg-green-500',
+  orange: 'bg-orange-500',
+  rose:   'bg-rose-500',
+  slate:  'bg-slate-500',
+}
+
 export default function Header() {
   const { currentUser: user, signInWithGoogle } = useAuth()
   const { teams } = useMyTeams(user?.id ?? '')
@@ -40,7 +49,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="text-sm font-semibold tracking-tight">
-          Team Prioritization Matrix
+          Team Eisenhower
         </Link>
 
         {user && (
@@ -69,7 +78,7 @@ export default function Header() {
         {user ? (
           <Link href="/my" className="flex items-center gap-2">
             <Avatar className="h-7 w-7">
-              <AvatarFallback className="text-xs">
+              <AvatarFallback className={`text-xs text-white ${THEME_BG[user.themeColor] ?? 'bg-violet-500'}`}>
                 {user.name.slice(0, 2)}
               </AvatarFallback>
             </Avatar>

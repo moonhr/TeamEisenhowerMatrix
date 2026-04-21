@@ -5,7 +5,7 @@ import HeroSection from '@/components/home/HeroSection'
 describe('HeroSection', () => {
   it('h1 타이틀을 렌더한다', () => {
     render(<HeroSection userName="김철수" onNewTeam={() => {}} />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Team Prioritization Matrix')
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Team Eisenhower')
   })
 
   it('사용자 이름이 포함된 환영 메시지를 렌더한다', () => {

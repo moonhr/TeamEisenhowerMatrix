@@ -33,7 +33,7 @@ jest.mock('next/navigation', () => ({
 describe('Header', () => {
   it('로고 텍스트를 렌더한다', () => {
     render(<Header />)
-    expect(screen.getByText('Team Prioritization Matrix')).toBeInTheDocument()
+    expect(screen.getByText('Team Eisenhower')).toBeInTheDocument()
   })
 
   it('로그인 상태에서 검색 입력창을 렌더한다', () => {

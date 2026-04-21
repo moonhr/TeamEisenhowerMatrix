@@ -9,10 +9,21 @@ import {
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import type { Team } from '@/types'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import type { Team, User } from '@/types'
+
+const THEME_BG: Record<string, string> = {
+  violet: 'bg-violet-500',
+  blue:   'bg-blue-500',
+  green:  'bg-green-500',
+  orange: 'bg-orange-500',
+  rose:   'bg-rose-500',
+  slate:  'bg-slate-500',
+}
 
 type TeamManagementProps = {
   teams: Team[]
+  memberMap?: Map<string, User>
   loading?: boolean
   currentUserId: string
   onRename: (teamId: string) => void
@@ -20,7 +31,7 @@ type TeamManagementProps = {
   onDelete: (teamId: string) => void
 }
 
-export default function TeamManagement({ teams, loading, currentUserId, onRename, onExit, onDelete }: TeamManagementProps) {
+export default function TeamManagement({ teams, memberMap = new Map(), loading, currentUserId, onRename, onExit, onDelete }: TeamManagementProps) {
   const [deletingTeam, setDeletingTeam] = useState<Team | null>(null)
 
   return (
@@ -41,7 +52,36 @@ export default function TeamManagement({ teams, loading, currentUserId, onRename
             return (
               <Card key={team.id}>
                 <CardContent className="flex items-center justify-between py-3">
-                  <span className="text-sm font-medium">{team.name}</span>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">{team.name}</span>
+                      {isCreator && (
+                        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                          관리자
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex -space-x-1.5">
+                      {team.memberIds.map((memberId) => {
+                        const member = memberMap.get(memberId)
+                        if (!member) return null
+                        return (
+                          <Avatar
+                            key={memberId}
+                            className="h-6 w-6 ring-2 ring-background"
+                            title={member.name}
+                          >
+                            <AvatarFallback className={`text-[10px] text-white ${THEME_BG[member.themeColor] ?? 'bg-violet-500'}`}>
+                              {member.name.slice(0, 2)}
+                            </AvatarFallback>
+                          </Avatar>
+                        )
+                      })}
+                      <span className="ml-3 self-center text-xs text-muted-foreground">
+                        {team.memberIds.filter((id) => memberMap.has(id)).map((id) => memberMap.get(id)!.name).join(', ')}
+                      </span>
+                    </div>
+                  </div>
                   <div className="flex gap-1">
                     {isCreator && (
                       <Button
