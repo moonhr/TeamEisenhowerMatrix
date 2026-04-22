@@ -63,4 +63,19 @@ describe('MatrixTaskCard', () => {
     )
     expect(screen.getByRole('checkbox')).toBeChecked()
   })
+
+  it('readOnly이면 체크박스와 사이드바 이동 버튼을 비활성화한다', () => {
+    render(
+      <MatrixTaskCard
+        task={mockTask}
+        assignee={mockAssignee}
+        readOnly
+        onToggle={() => {}}
+        onMoveToSidebar={() => {}}
+      />
+    )
+
+    expect(screen.getByRole('checkbox')).toBeDisabled()
+    expect(screen.queryByRole('button', { name: /사이드바/i })).not.toBeInTheDocument()
+  })
 })

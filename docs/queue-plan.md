@@ -113,15 +113,21 @@
 - 현재 주차 선택 시에는 `?week=`를 제거해 canonical URL 유지
 
 **구현 목록**
-- [ ] `taskRepository.getEarliestWeekKey(teamId)` 추가
-- [ ] `TeamPage` 에 `earliestWeekKey` 로딩 로직 추가
-- [ ] `week.ts` 에 `isValidWeekKey`, `compareWeekKeys`, `getWeekRange` 유틸 추가
-- [ ] `TeamPage` 의 `weekKey` 로컬 state 제거 후 `searchParams.week` 기반 `viewWeekKey` 도입
-- [ ] `PreviousWeekModal` 을 최근 8주 버튼 목록에서 `Select + 확인 버튼` 구조로 변경
-- [ ] `PreviousWeekModal` 에 `earliestWeekKey`, `selectedWeekKey` props 연결
-- [ ] 현재 주차 복귀 시 `/team/:id` 로 이동하도록 정리
-- [ ] 과거 주차 empty state 문구 추가
-- [ ] TDD: `earliestWeekKey` 조회, URL query fallback, Select 옵션 범위, read-only 분기 테스트
+- [x] `taskRepository.getEarliestWeekKey(teamId)` 추가
+- [x] `TeamPage` 에 `earliestWeekKey` 로딩 로직 추가
+- [x] `week.ts` 에 `isValidWeekKey`, `compareWeekKeys`, `getWeekRange` 유틸 추가
+- [x] `TeamPage` 의 `weekKey` 로컬 state 제거 후 `searchParams.week` 기반 `viewWeekKey` 도입
+- [x] `PreviousWeekModal` 을 최근 8주 버튼 목록에서 `Select + 확인 버튼` 구조로 변경
+- [x] `PreviousWeekModal` 에 `earliestWeekKey`, `selectedWeekKey` props 연결
+- [x] 현재 주차 복귀 시 `/team/:id` 로 이동하도록 정리
+- [x] 과거 주차 empty state 문구 추가
+- [ ] TDD 보강: `getEarliestWeekKey` 저장소 레벨 테스트, `searchParams.week` fallback 페이지 테스트
+
+**검증 현황**
+- [x] `week.ts` 유틸 테스트 추가 (`isValidWeekKey`, `compareWeekKeys`, `getWeekRange`)
+- [x] `PreviousWeekModal` Select 동작 테스트 추가
+- [x] 과거 주차 read-only 카드 동작 테스트 추가
+- [x] `npm run build` 통과
 
 **보류 사항**
 - 실제로 태스크가 존재하는 주차만 정확히 보여줘야 하면 `teamWeeks` 인덱스 컬렉션 도입 검토
@@ -198,33 +204,33 @@
 
 ### Queue 16: i18n 기반 셋업
 
-- [ ] `next-intl` v3 설치
-- [ ] `src/i18n/routing.ts` — `locales: ['ko', 'en']`, `defaultLocale: 'ko'`
-- [ ] `src/i18n/request.ts` — `getRequestConfig` (쿠키 `NEXT_LOCALE` 기반 locale 읽기)
-- [ ] `src/middleware.ts` — `createMiddleware` (locale 감지 → 쿠키 세팅, `localePrefix: 'never'`)
-- [ ] `messages/ko.json` — 전체 네임스페이스 초기 구조 + 한국어 문자열
-- [ ] `messages/en.json` — 전체 네임스페이스 초기 구조 + 영어 문자열
-- [ ] `next.config.ts` — `withNextIntl` 래핑
-- [ ] `app/layout.tsx` — `NextIntlClientProvider` 주입
+- [x] `next-intl` 설치 (`next-intl` v4.9.1)
+- [x] `src/i18n/routing.ts` — locale 목록 및 `defaultLocale: 'ko'` 설정
+- [x] `src/i18n/request.ts` — `getRequestConfig` (쿠키 `NEXT_LOCALE` 기반 locale 읽기)
+- [x] `src/proxy.ts` — `createMiddleware` 기반 locale 감지 및 쿠키 세팅 (`localePrefix: 'never'`)
+- [x] `messages/ko.json` — 전체 네임스페이스 초기 구조 + 한국어 문자열
+- [x] `messages/en.json` — 전체 네임스페이스 초기 구조 + 영어 문자열
+- [x] `next.config.ts` — `withNextIntl` 래핑
+- [x] `src/app/layout.tsx` — `NextIntlClientProvider` 주입
 
 ### Queue 17: 컴포넌트 문자열 추출
 
-- [ ] `HeroSection` — 인사말, 버튼 텍스트
-- [ ] `ActiveTeamsSection` — 섹션 제목, 빈 상태 메시지
-- [ ] `EisenhowerLogicSection` — 4가지 분류 설명 카드
-- [ ] `Header` — 검색 placeholder, 프로필 메뉴
-- [ ] `TaskForm` — placeholder, 레이블, 버튼
-- [ ] `TaskCard` / `MatrixTaskCard` — 상태 텍스트, 날짜 포맷
-- [ ] `TaskSidebar` / `DroppableTaskSidebar` — 섹션 제목
-- [ ] `TeamHeader` — 주차 표기, 버튼 레이블
-- [ ] `PreviousWeekModal` — 제목, 안내 문구
-- [ ] `PriorityTagManager` — 레이블, 버튼
-- [ ] `NewTeamModal` — 제목, 입력 placeholder
-- [ ] `TaskEditModal` — 레이블, 버튼
-- [ ] `my/*` 전체 (DisplayNameForm, AvatarSelector, ThemeColorSelector, ColorSchemeSelector, TeamManagement)
-- [ ] `AuthGuard`, `login/page`, `join/*` — 안내 문구
-- [ ] `week.ts` `formatWeekLabel` 함수 locale 파라미터 분기 처리
-- [ ] TDD: `formatWeekLabel` ko/en 양 언어 케이스 추가
+- [x] `HeroSection` — 인사말, 버튼 텍스트
+- [x] `ActiveTeamsSection` — 섹션 제목, 빈 상태 메시지
+- [x] `EisenhowerLogicSection` — 4가지 분류 설명 카드
+- [x] `Header` — 검색 placeholder, 로그인 버튼
+- [x] `TaskForm` — placeholder, 레이블, 버튼
+- [x] `TaskCard` / `MatrixTaskCard` — 메뉴 문자열, 날짜 포맷 locale 반영
+- [x] `TaskSidebar` / `DroppableTaskSidebar` — 섹션 제목
+- [x] `TeamHeader` — 주차 표기, 버튼 레이블
+- [x] `PreviousWeekModal` — 제목, 안내 문구
+- [x] `PriorityTagManager` — 레이블, 버튼
+- [x] `NewTeamModal` — 제목, 입력 placeholder
+- [x] `TaskEditModal` — 레이블, 버튼
+- [x] `my/*` 전체 (DisplayNameForm, AvatarSelector, ThemeColorSelector, ColorSchemeSelector, TeamManagement)
+- [x] `AuthGuard`, `login/page`, `join/*` — 안내 문구
+- [x] `week.ts` `weekKeyToDisplay` 함수 locale 파라미터 분기 처리
+- [x] TDD: week label ko/en 양 언어 케이스 추가
 
 ### Queue 18: 언어 설정 UI
 

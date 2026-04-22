@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from 'react'
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import TeamHeader from '@/components/team/TeamHeader'
 import DroppableTaskSidebar from '@/components/team/DroppableTaskSidebar'
@@ -10,7 +11,7 @@ import MatrixCanvas from '@/components/team/MatrixCanvas'
 import TaskSidebar from '@/components/team/TaskSidebar'
 import TaskCard from '@/components/team/TaskCard'
 import PreviousWeekModal from '@/components/team/PreviousWeekModal'
-import { getCurrentWeekKey } from '@/lib/utils/week'
+import { compareWeekKeys, getCurrentWeekKey, isValidWeekKey } from '@/lib/utils/week'
 import { applyDragEnd, type DropZoneId } from '@/lib/utils/dnd'
 import { useTaskStore } from '@/stores/taskStore'
 import { useRealtimeTasks } from '@/hooks/useRealtimeTasks'
@@ -28,15 +29,47 @@ import type { MatrixPosition, PriorityTag, Task, Team, User } from '@/types'
 
 type NewTaskInput = Omit<Task, 'id' | 'teamId' | 'weekKey' | 'status' | 'matrixPosition'>
 
-export default function TeamPage({ params }: { params: Promise<{ id: string }> }) {
+type TeamPageSearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+function getSingleSearchParamValue(value: string | string[] | undefined): string | null {
+  if (Array.isArray(value)) return value[0] ?? null
+  return value ?? null
+}
+
+function resolveViewWeekKey(
+  requestedWeekKey: string | null,
+  currentWeekKey: string,
+  earliestWeekKey: string | null | undefined
+): string {
+  if (!requestedWeekKey || !isValidWeekKey(requestedWeekKey)) return currentWeekKey
+  if (compareWeekKeys(requestedWeekKey, currentWeekKey) > 0) return currentWeekKey
+  if (earliestWeekKey && compareWeekKeys(requestedWeekKey, earliestWeekKey) < 0) return earliestWeekKey
+  return requestedWeekKey
+}
+
+function buildTeamWeekHref(teamId: string, currentWeekKey: string, targetWeekKey: string) {
+  if (targetWeekKey === currentWeekKey) return `/team/${teamId}`
+  return `/team/${teamId}?week=${targetWeekKey}`
+}
+
+export default function TeamPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>
+  searchParams: TeamPageSearchParams
+}) {
   const t = useTranslations('TeamPage')
+  const router = useRouter()
   const { id } = use(params)
+  const query = use(searchParams)
   const currentWeekKey = getCurrentWeekKey()
   const currentUser = useCurrentUser()
+  const requestedWeekKey = getSingleSearchParamValue(query.week)
 
   const [team, setTeam] = useState<Team | null>(null)
   const [members, setMembers] = useState<User[]>([])
-  const [weekKey, setWeekKey] = useState(currentWeekKey)
+  const [earliestWeekKey, setEarliestWeekKey] = useState<string | null | undefined>(undefined)
   const [modalOpen, setModalOpen] = useState(false)
   const [tagModalOpen, setTagModalOpen] = useState(false)
   const [editingTask, setEditingTask] = useState<Task | null>(null)
@@ -46,31 +79,65 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
   )
 
-  const isReadOnly = weekKey !== currentWeekKey
+  const viewWeekKey = resolveViewWeekKey(requestedWeekKey, currentWeekKey, earliestWeekKey)
+  const canonicalWeekKey = viewWeekKey === currentWeekKey ? null : viewWeekKey
+  const isReadOnly = viewWeekKey !== currentWeekKey
 
-  const { tasks, setTasks, addTask, updateTask, toggleTask, deleteTask, moveToMatrix, moveToSidebar, getTasksByWeek } =
+  const { tasks, setTasks, updateTask, toggleTask, deleteTask, moveToSidebar, getTasksByWeek } =
     useTaskStore()
 
   useEffect(() => {
-    getTeam(id).then(async (t) => {
-      if (t) {
-        setTeam(t)
-        setMembers(await getUsers(t.memberIds))
+    let isMounted = true
+
+    Promise.all([getTeam(id), taskRepo.getEarliestWeekKey(id)]).then(async ([nextTeam, earliest]) => {
+      if (!isMounted) return
+
+      setEarliestWeekKey(earliest)
+
+      if (!nextTeam) {
+        setTeam(null)
+        setMembers([])
+        return
       }
+
+      setTeam(nextTeam)
+      const nextMembers = await getUsers(nextTeam.memberIds)
+      if (!isMounted) return
+      setMembers(nextMembers)
     })
+
+    return () => {
+      isMounted = false
+    }
   }, [id])
 
-  useRealtimeTasks(id, weekKey)
+  useEffect(() => {
+    if (earliestWeekKey === undefined) return
+
+    const currentUrlWeekKey = requestedWeekKey
+    const hasCanonicalMismatch = canonicalWeekKey !== currentUrlWeekKey
+
+    if (!hasCanonicalMismatch) return
+
+    router.replace(
+      canonicalWeekKey
+        ? buildTeamWeekHref(id, currentWeekKey, canonicalWeekKey)
+        : `/team/${id}`,
+      { scroll: false }
+    )
+  }, [canonicalWeekKey, currentWeekKey, earliestWeekKey, id, requestedWeekKey, router])
+
+  useRealtimeTasks(id, viewWeekKey)
   const { onlineUsers: presenceList } = usePresence(id, currentUser)
   const { remoteCursors } = useCursor(id, currentUser)
 
-  const weekTasks = getTasksByWeek(id, weekKey)
+  const weekTasks = getTasksByWeek(id, viewWeekKey)
   const onlineUsers = presenceList.length > 0
     ? presenceList.map((p) => ({ id: p.userId, name: p.name, avatar: p.avatar, themeColor: 'violet' as const, colorScheme: 'light' as const }))
     : members
 
   const handleAddTask = async (input: NewTaskInput) => {
-    await taskRepo.addTask({ ...input, teamId: id, weekKey, status: 'todo', matrixPosition: null })
+    await taskRepo.addTask({ ...input, teamId: id, weekKey: viewWeekKey, status: 'todo', matrixPosition: null })
   }
 
   const handleToggleTask = async (taskId: string) => {
@@ -125,7 +192,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     <div className="flex h-screen flex-col">
       <TeamHeader
         teamName={team.name}
-        weekKey={weekKey}
+        weekKey={viewWeekKey}
         inviteCode={team.inviteCode}
         onPreviousWeek={() => setModalOpen(true)}
         onManageTags={() => setTagModalOpen(true)}
@@ -137,10 +204,16 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
           <span>{t('readOnlyBanner')}</span>
           <button
             className="font-medium underline"
-            onClick={() => setWeekKey(currentWeekKey)}
+            onClick={() => router.push(`/team/${id}`, { scroll: false })}
           >
             {t('backToCurrentWeek')}
           </button>
+        </div>
+      )}
+
+      {isReadOnly && weekTasks.length === 0 && (
+        <div className="border-b bg-muted/40 px-4 py-2 text-xs text-muted-foreground">
+          {t('emptyWeek')}
         </div>
       )}
 
@@ -151,6 +224,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
             tasks={weekTasks}
             members={members}
             priorityTags={priorityTags}
+            readOnly
             onAddTask={() => {}}
             onToggleTask={() => {}}
             onDeleteTask={() => {}}
@@ -161,8 +235,8 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
               members={members}
               onlineUsers={onlineUsers}
               priorityTags={priorityTags}
+              readOnly
               onToggle={() => {}}
-              onEdit={setEditingTask}
             />
           </main>
         </div>
@@ -212,9 +286,12 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
 
       <PreviousWeekModal
         open={modalOpen}
+        earliestWeekKey={earliestWeekKey ?? currentWeekKey}
         currentWeekKey={currentWeekKey}
+        selectedWeekKey={viewWeekKey}
+        isLoading={earliestWeekKey === undefined}
         onOpenChange={setModalOpen}
-        onSelect={(wk) => setWeekKey(wk)}
+        onSelect={(wk) => router.push(buildTeamWeekHref(id, currentWeekKey, wk), { scroll: false })}
       />
 
       <TaskEditModal

@@ -55,4 +55,19 @@ describe('TaskCard', () => {
     )
     expect(screen.getByRole('checkbox')).not.toBeChecked()
   })
+
+  it('readOnly이면 체크박스와 삭제 버튼을 비활성화한다', () => {
+    render(
+      <TaskCard
+        task={mockTask}
+        assignee={mockAssignee}
+        readOnly
+        onToggle={() => {}}
+        onDelete={() => {}}
+      />
+    )
+
+    expect(screen.getByRole('checkbox')).toBeDisabled()
+    expect(screen.queryByRole('button', { name: /삭제/i })).not.toBeInTheDocument()
+  })
 })

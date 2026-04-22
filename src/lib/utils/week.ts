@@ -1,6 +1,7 @@
 import type { AppLocale } from '@/types'
 
 export type WeekLocale = AppLocale
+const WEEK_KEY_PATTERN = /^\d{4}-W\d{2}$/
 
 function getMondayOfISOWeek(isoYear: number, isoWeek: number): Date {
   // Jan 4 is always in ISO W01
@@ -65,6 +66,43 @@ export function getCurrentWeekKey(): string {
 
 export function getPreviousWeeks(weekKey: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) => addWeeks(weekKey, -(i + 1)))
+}
+
+export function isValidWeekKey(weekKey: string | null | undefined): weekKey is string {
+  if (!weekKey || !WEEK_KEY_PATTERN.test(weekKey)) return false
+
+  const [yearStr, weekStr] = weekKey.split('-W')
+  const isoYear = Number(yearStr)
+  const isoWeek = Number(weekStr)
+
+  if (!Number.isInteger(isoYear) || !Number.isInteger(isoWeek)) return false
+  if (isoWeek < 1 || isoWeek > 53) return false
+
+  return dateToWeekKey(getMondayOfISOWeek(isoYear, isoWeek)) === weekKey
+}
+
+export function compareWeekKeys(a: string, b: string): number {
+  const [aYearStr, aWeekStr] = a.split('-W')
+  const [bYearStr, bWeekStr] = b.split('-W')
+
+  const aMonday = getMondayOfISOWeek(Number(aYearStr), Number(aWeekStr))
+  const bMonday = getMondayOfISOWeek(Number(bYearStr), Number(bWeekStr))
+
+  return aMonday.getTime() - bMonday.getTime()
+}
+
+export function getWeekRange(startWeekKey: string, endWeekKey: string): string[] {
+  if (compareWeekKeys(startWeekKey, endWeekKey) > 0) return []
+
+  const weeks: string[] = []
+  let currentWeekKey = startWeekKey
+
+  while (compareWeekKeys(currentWeekKey, endWeekKey) <= 0) {
+    weeks.push(currentWeekKey)
+    currentWeekKey = addWeeks(currentWeekKey, 1)
+  }
+
+  return weeks
 }
 
 export function addWeeks(weekKey: string, n: number): string {

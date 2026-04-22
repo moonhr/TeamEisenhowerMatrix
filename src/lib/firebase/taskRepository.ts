@@ -1,6 +1,6 @@
 import {
   collection, doc, addDoc, updateDoc, deleteDoc,
-  query as firestoreQuery, where, orderBy, getDocs, onSnapshot,
+  query as firestoreQuery, where, orderBy, limit, getDocs, onSnapshot,
   serverTimestamp, type Unsubscribe,
 } from 'firebase/firestore'
 import { db } from './config'
@@ -17,6 +17,21 @@ export async function getTasksByWeek(teamId: string, weekKey: string): Promise<T
   )
   const snap = await getDocs(q)
   return snap.docs.map((d) => toTask(d.id, d.data()))
+}
+
+export async function getEarliestWeekKey(teamId: string): Promise<string | null> {
+  const q = firestoreQuery(
+    collection(db, COL),
+    where('teamId', '==', teamId),
+    orderBy('weekKey', 'asc'),
+    limit(1)
+  )
+  const snap = await getDocs(q)
+  const earliestDoc = snap.docs[0]
+  if (!earliestDoc) return null
+
+  const weekKey = earliestDoc.data().weekKey
+  return typeof weekKey === 'string' && weekKey ? weekKey : null
 }
 
 export async function addTask(

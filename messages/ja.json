@@ -157,6 +157,7 @@
   "PreviousWeekModal": {
     "title": "過去の週を見る",
     "description": "開く週を選択してください。過去の週は読み取り専用です。",
+    "noPreviousWeeks": "まだ過去の週はありません。",
     "confirm": "移動",
     "cancel": "キャンセル"
   },
@@ -277,7 +278,8 @@
   "TeamPage": {
     "loading": "チーム情報を読み込み中...",
     "readOnlyBanner": "過去週の閲覧モードです。編集はできません。",
-    "backToCurrentWeek": "今週に戻る"
+    "backToCurrentWeek": "今週に戻る",
+    "emptyWeek": "選択した週にはタスクがありません。"
   },
   "Week": {
     "label": "{year}年{month}月第{week}週"

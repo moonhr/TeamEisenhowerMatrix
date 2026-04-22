@@ -14,6 +14,7 @@ type MatrixCanvasProps = {
   members: User[]
   onlineUsers: User[]
   priorityTags?: PriorityTag[]
+  readOnly?: boolean
   onToggle: (taskId: string) => void
   onEdit?: (task: Task) => void
   onMoveToSidebar?: (taskId: string) => void
@@ -24,6 +25,7 @@ export default function MatrixCanvas({
   members,
   onlineUsers,
   priorityTags = [],
+  readOnly = false,
   onToggle,
   onEdit,
   onMoveToSidebar,
@@ -39,6 +41,7 @@ export default function MatrixCanvas({
             tasks={tasks}
             members={members}
             priorityTags={priorityTags}
+            readOnly={readOnly}
             onToggle={onToggle}
             onEdit={onEdit}
             onMoveToSidebar={onMoveToSidebar}

@@ -11,6 +11,7 @@ type TaskSidebarProps = {
   tasks: Task[]
   members: User[]
   priorityTags?: PriorityTag[]
+  readOnly?: boolean
   onAddTask: (task: NewTaskInput) => void
   onToggleTask: (taskId: string) => void
   onEditTask?: (task: Task) => void
@@ -21,6 +22,7 @@ export default function TaskSidebar({
   tasks,
   members,
   priorityTags = [],
+  readOnly = false,
   onAddTask,
   onToggleTask,
   onEditTask,
@@ -32,7 +34,9 @@ export default function TaskSidebar({
   return (
     <aside className="flex h-full w-72 shrink-0 flex-col gap-3 border-r p-3">
       <h4 className="text-sm font-semibold">{t('title')}</h4>
-      <TaskForm members={members} priorityTags={priorityTags} onSubmit={onAddTask} />
+      {!readOnly && (
+        <TaskForm members={members} priorityTags={priorityTags} onSubmit={onAddTask} />
+      )}
       <div className="flex-1 space-y-1 overflow-y-auto">
         {sidebarTasks.map((task) => (
           <TaskCard
@@ -40,6 +44,7 @@ export default function TaskSidebar({
             task={task}
             assignee={members.find((m) => m.id === task.assigneeId)}
             priorityTag={priorityTags.find((t) => t.id === task.priorityTagId)}
+            readOnly={readOnly}
             onToggle={onToggleTask}
             onEdit={onEditTask}
             onDelete={onDeleteTask}

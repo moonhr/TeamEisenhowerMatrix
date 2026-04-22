@@ -157,6 +157,7 @@
   "PreviousWeekModal": {
     "title": "Frühere Wochen durchsuchen",
     "description": "Wähle eine Woche zum Öffnen aus. Frühere Wochen sind schreibgeschützt.",
+    "noPreviousWeeks": "Es gibt noch keine früheren Wochen.",
     "confirm": "Wechseln",
     "cancel": "Abbrechen"
   },
@@ -277,7 +278,8 @@
   "TeamPage": {
     "loading": "Teaminformationen werden geladen...",
     "readOnlyBanner": "Ansicht einer früheren Woche. Bearbeitung ist deaktiviert.",
-    "backToCurrentWeek": "Zur aktuellen Woche zurück"
+    "backToCurrentWeek": "Zur aktuellen Woche zurück",
+    "emptyWeek": "Für die ausgewählte Woche gibt es keine Aufgaben."
   },
   "Week": {
     "label": "Woche {week} von {month}/{year}"

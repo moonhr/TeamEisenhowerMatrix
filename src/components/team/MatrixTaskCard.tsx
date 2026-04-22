@@ -22,6 +22,7 @@ type MatrixTaskCardProps = {
   task: Task
   assignee: User | undefined
   priorityTag?: PriorityTag
+  readOnly?: boolean
   onToggle: (taskId: string) => void
   onEdit?: (task: Task) => void
   onMoveToSidebar?: (taskId: string) => void
@@ -31,6 +32,7 @@ export default function MatrixTaskCard({
   task,
   assignee,
   priorityTag,
+  readOnly = false,
   onToggle,
   onEdit,
   onMoveToSidebar,
@@ -44,7 +46,10 @@ export default function MatrixTaskCard({
       <input
         type="checkbox"
         checked={isDone}
-        onChange={() => onToggle(task.id)}
+        disabled={readOnly}
+        onChange={() => {
+          if (!readOnly) onToggle(task.id)
+        }}
         onPointerDown={(event) => event.stopPropagation()}
         className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer accent-primary"
       />
@@ -67,28 +72,30 @@ export default function MatrixTaskCard({
           )}
         </div>
       </div>
-      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        {onEdit && (
-          <button
-            onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => onEdit(task)}
-            className="h-5 w-5 flex items-center justify-center rounded hover:bg-muted"
-            aria-label={t('menu')}
-          >
-            <MoreVertical className="h-3 w-3" />
-          </button>
-        )}
-        {onMoveToSidebar && (
-          <button
-            onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => onMoveToSidebar(task.id)}
-            className="h-5 w-5 flex items-center justify-center rounded hover:bg-muted"
-            aria-label={t('moveToSidebar')}
-          >
-            <ArrowLeft className="h-3 w-3" />
-          </button>
-        )}
-      </div>
+      {!readOnly && (
+        <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+          {onEdit && (
+            <button
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => onEdit(task)}
+              className="h-5 w-5 flex items-center justify-center rounded hover:bg-muted"
+              aria-label={t('menu')}
+            >
+              <MoreVertical className="h-3 w-3" />
+            </button>
+          )}
+          {onMoveToSidebar && (
+            <button
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => onMoveToSidebar(task.id)}
+              className="h-5 w-5 flex items-center justify-center rounded hover:bg-muted"
+              aria-label={t('moveToSidebar')}
+            >
+              <ArrowLeft className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   )
 }

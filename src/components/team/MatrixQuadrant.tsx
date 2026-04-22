@@ -15,6 +15,7 @@ type MatrixQuadrantProps = {
   tasks: Task[]
   members: User[]
   priorityTags?: PriorityTag[]
+  readOnly?: boolean
   onToggle: (taskId: string) => void
   onEdit?: (task: Task) => void
   onMoveToSidebar?: (taskId: string) => void
@@ -26,6 +27,7 @@ export default function MatrixQuadrant({
   tasks,
   members,
   priorityTags = [],
+  readOnly = false,
   onToggle,
   onEdit,
   onMoveToSidebar,
@@ -48,6 +50,7 @@ export default function MatrixQuadrant({
             task={task}
             assignee={members.find((m) => m.id === task.assigneeId)}
             priorityTag={priorityTags.find((t) => t.id === task.priorityTagId)}
+            readOnly={readOnly}
             onToggle={onToggle}
             onEdit={onEdit}
             onMoveToSidebar={onMoveToSidebar}

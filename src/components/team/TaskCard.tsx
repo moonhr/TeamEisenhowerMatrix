@@ -22,12 +22,21 @@ type TaskCardProps = {
   task: Task
   assignee: User | undefined
   priorityTag?: PriorityTag
+  readOnly?: boolean
   onToggle: (taskId: string) => void
   onEdit?: (task: Task) => void
   onDelete: (taskId: string) => void
 }
 
-export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit, onDelete }: TaskCardProps) {
+export default function TaskCard({
+  task,
+  assignee,
+  priorityTag,
+  readOnly = false,
+  onToggle,
+  onEdit,
+  onDelete,
+}: TaskCardProps) {
   const t = useTranslations('TaskCard')
   const locale = useLocale()
   const isDone = task.status === 'done'
@@ -37,7 +46,10 @@ export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit
       <input
         type="checkbox"
         checked={isDone}
-        onChange={() => onToggle(task.id)}
+        disabled={readOnly}
+        onChange={() => {
+          if (!readOnly) onToggle(task.id)
+        }}
         onPointerDown={(event) => event.stopPropagation()}
         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
       />
@@ -60,26 +72,28 @@ export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit
           )}
         </div>
       </div>
-      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-        {onEdit && (
+      {!readOnly && (
+        <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+          {onEdit && (
+            <button
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={() => onEdit(task)}
+              className="h-6 w-6 flex items-center justify-center rounded hover:bg-muted"
+              aria-label={t('menu')}
+            >
+              <MoreVertical className="h-3.5 w-3.5" />
+            </button>
+          )}
           <button
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={() => onEdit(task)}
+            onClick={() => onDelete(task.id)}
             className="h-6 w-6 flex items-center justify-center rounded hover:bg-muted"
-            aria-label={t('menu')}
+            aria-label={t('delete')}
           >
-            <MoreVertical className="h-3.5 w-3.5" />
+            <Trash2 className="h-3.5 w-3.5" />
           </button>
-        )}
-        <button
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={() => onDelete(task.id)}
-          className="h-6 w-6 flex items-center justify-center rounded hover:bg-muted"
-          aria-label={t('delete')}
-        >
-          <Trash2 className="h-3.5 w-3.5" />
-        </button>
-      </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -157,6 +157,7 @@
   "PreviousWeekModal": {
     "title": "Parcourir les semaines précédentes",
     "description": "Choisissez une semaine à ouvrir. Les semaines précédentes sont en lecture seule.",
+    "noPreviousWeeks": "Il n'y a pas encore de semaines précédentes.",
     "confirm": "Déplacer",
     "cancel": "Annuler"
   },
@@ -277,7 +278,8 @@
   "TeamPage": {
     "loading": "Chargement des informations de l'équipe...",
     "readOnlyBanner": "Mode de consultation d'une semaine précédente. La modification est désactivée.",
-    "backToCurrentWeek": "Revenir à la semaine en cours"
+    "backToCurrentWeek": "Revenir à la semaine en cours",
+    "emptyWeek": "Il n'y a pas de tâches pour la semaine sélectionnée."
   },
   "Week": {
     "label": "Semaine {week} de {month}/{year}"

@@ -1,4 +1,12 @@
-import { weekKeyToDisplay, getCurrentWeekKey, dateToWeekKey, addWeeks } from '@/lib/utils/week'
+import {
+  weekKeyToDisplay,
+  getCurrentWeekKey,
+  dateToWeekKey,
+  addWeeks,
+  isValidWeekKey,
+  compareWeekKeys,
+  getWeekRange,
+} from '@/lib/utils/week'
 
 describe('weekKeyToDisplay', () => {
   it('일반 주차를 한국어 형식으로 변환한다', () => {
@@ -89,5 +97,62 @@ describe('addWeeks', () => {
   it('연도 경계를 넘어 이전 연도로 이동한다', () => {
     // 2025년은 W52까지 존재 (Jan 1, 2025 = Wednesday, 비윤년)
     expect(addWeeks('2026-W01', -1)).toBe('2025-W52')
+  })
+})
+
+describe('isValidWeekKey', () => {
+  it('유효한 ISO weekKey를 통과시킨다', () => {
+    expect(isValidWeekKey('2026-W17')).toBe(true)
+    expect(isValidWeekKey('2026-W01')).toBe(true)
+  })
+
+  it('형식이 잘못된 weekKey를 거부한다', () => {
+    expect(isValidWeekKey('2026-17')).toBe(false)
+    expect(isValidWeekKey('W17')).toBe(false)
+    expect(isValidWeekKey('')).toBe(false)
+    expect(isValidWeekKey(null)).toBe(false)
+  })
+
+  it('존재하지 않는 주차를 거부한다', () => {
+    expect(isValidWeekKey('2026-W00')).toBe(false)
+    expect(isValidWeekKey('2026-W54')).toBe(false)
+    expect(isValidWeekKey('2025-W53')).toBe(false)
+  })
+})
+
+describe('compareWeekKeys', () => {
+  it('앞선 주차는 음수를 반환한다', () => {
+    expect(compareWeekKeys('2026-W16', '2026-W17')).toBeLessThan(0)
+  })
+
+  it('같은 주차는 0을 반환한다', () => {
+    expect(compareWeekKeys('2026-W17', '2026-W17')).toBe(0)
+  })
+
+  it('뒤의 주차는 양수를 반환한다', () => {
+    expect(compareWeekKeys('2026-W18', '2026-W17')).toBeGreaterThan(0)
+  })
+})
+
+describe('getWeekRange', () => {
+  it('시작 주차부터 종료 주차까지 포함해 반환한다', () => {
+    expect(getWeekRange('2026-W14', '2026-W17')).toEqual([
+      '2026-W14',
+      '2026-W15',
+      '2026-W16',
+      '2026-W17',
+    ])
+  })
+
+  it('연도 경계를 넘어 범위를 생성한다', () => {
+    expect(getWeekRange('2025-W52', '2026-W02')).toEqual([
+      '2025-W52',
+      '2026-W01',
+      '2026-W02',
+    ])
+  })
+
+  it('시작이 종료보다 뒤면 빈 배열을 반환한다', () => {
+    expect(getWeekRange('2026-W17', '2026-W16')).toEqual([])
   })
 })

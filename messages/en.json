@@ -211,6 +211,7 @@
   "PreviousWeekModal": {
     "title": "Browse previous weeks",
     "description": "Choose a week to open. Previous weeks are shown in read-only mode.",
+    "noPreviousWeeks": "There are no previous weeks yet.",
     "confirm": "Move",
     "cancel": "Cancel"
   },
@@ -331,7 +332,8 @@
   "TeamPage": {
     "loading": "Loading team information...",
     "readOnlyBanner": "Previous week view mode. Editing is disabled.",
-    "backToCurrentWeek": "Back to current week"
+    "backToCurrentWeek": "Back to current week",
+    "emptyWeek": "There are no tasks in the selected week."
   },
   "Week": {
     "label": "Week {week} of {month}/{year}"

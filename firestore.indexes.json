@@ -4,6 +4,14 @@
       "collectionGroup": "tasks",
       "queryScope": "COLLECTION",
       "fields": [
+        { "fieldPath": "teamId",  "order": "ASCENDING" },
+        { "fieldPath": "weekKey", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "tasks",
+      "queryScope": "COLLECTION",
+      "fields": [
         { "fieldPath": "teamId",    "order": "ASCENDING" },
         { "fieldPath": "weekKey",   "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
