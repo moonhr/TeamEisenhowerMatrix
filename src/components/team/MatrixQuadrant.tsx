@@ -17,7 +17,7 @@ type MatrixQuadrantProps = {
   priorityTags?: PriorityTag[]
   onToggle: (taskId: string) => void
   onEdit?: (task: Task) => void
-  onMoveToSidebar: (taskId: string) => void
+  onMoveToSidebar?: (taskId: string) => void
 }
 
 export default function MatrixQuadrant({

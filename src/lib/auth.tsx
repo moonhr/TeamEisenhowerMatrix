@@ -1,6 +1,8 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -8,8 +10,9 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth'
 import { auth } from './firebase/config'
-import { getUser, createUser } from './firebase/userRepository'
-import type { User } from '@/types'
+import { getUser, createUser, updateUserLocale } from './firebase/userRepository'
+import { syncLocaleCookie } from './i18n/localeCookie'
+import type { AppLocale, User } from '@/types'
 import { AVATARS } from './mock-data'
 
 type AuthContextType = {
@@ -23,6 +26,8 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { refresh } = useRouter()
+  const currentLocale = useLocale() as AppLocale
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -36,18 +41,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             avatar: AVATARS[0],
             themeColor: 'violet',
             colorScheme: 'light',
+            locale: currentLocale,
           }
           await createUser(firebaseUser.uid, defaults)
           user = { id: firebaseUser.uid, ...defaults }
+        } else if (!user.locale) {
+          await updateUserLocale(firebaseUser.uid, currentLocale)
+          user = { ...user, locale: currentLocale }
         }
+
         setCurrentUser(user)
+
+        if (user.locale && user.locale !== currentLocale) {
+          syncLocaleCookie(user.locale)
+          refresh()
+        }
       } else {
         setCurrentUser(null)
       }
       setLoading(false)
     })
     return unsubscribe
-  }, [])
+  }, [currentLocale, refresh])
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider()

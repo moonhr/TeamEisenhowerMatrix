@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header'
 import HeroSection from '@/components/home/HeroSection'
 import ActiveTeamsSection from '@/components/home/ActiveTeamsSection'
 import EisenhowerLogicSection from '@/components/home/EisenhowerLogicSection'
+import HomeFooter from '@/components/home/HomeFooter'
 import NewTeamModal from '@/components/home/NewTeamModal'
 import { useAuth } from '@/lib/auth'
 import { useMyTeams } from '@/hooks/useMyTeams'
@@ -48,6 +49,7 @@ export default function HomePage() {
         <div className="border-t" />
         <EisenhowerLogicSection />
       </main>
+      <HomeFooter />
       <NewTeamModal
         open={modalOpen}
         onOpenChange={setModalOpen}

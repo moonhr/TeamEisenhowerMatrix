@@ -1,4 +1,7 @@
+import { useLocale } from 'next-intl'
 import { FileText, Users } from 'lucide-react'
+
+import { weekKeyToDisplay, type WeekLocale } from '@/lib/utils/week'
 import type { Task, Team } from '@/types'
 
 type TaskResult = Task & { teamName: string }
@@ -8,6 +11,8 @@ type Props =
   | { type: 'team'; item: Team; onClick: () => void }
 
 export default function SearchResultItem({ type, item, onClick }: Props) {
+  const locale = useLocale() as WeekLocale
+
   return (
     <button
       onClick={onClick}
@@ -24,7 +29,7 @@ export default function SearchResultItem({ type, item, onClick }: Props) {
         </p>
         {type === 'task' && (
           <p className="truncate text-xs text-muted-foreground">
-            {(item as TaskResult).teamName} · {(item as TaskResult).weekKey}
+            {(item as TaskResult).teamName} · {weekKeyToDisplay((item as TaskResult).weekKey, locale)}
           </p>
         )}
       </div>

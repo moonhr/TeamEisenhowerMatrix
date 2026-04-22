@@ -1,0 +1,339 @@
+{
+  "App": {
+    "title": "Team Eisenhower Matrix",
+    "description": "팀 우선순위 관리 서비스"
+  },
+  "Common": {
+    "save": "저장",
+    "cancel": "취소",
+    "close": "닫기",
+    "edit": "수정",
+    "delete": "삭제",
+    "create": "생성",
+    "loading": "로딩 중...",
+    "search": "검색",
+    "home": "홈",
+    "invite": "초대"
+  },
+  "Header": {
+    "searchPlaceholder": "Search...",
+    "login": "로그인"
+  },
+  "Search": {
+    "loading": "검색 중...",
+    "tasks": "Tasks",
+    "teams": "Teams",
+    "noResults": "검색 결과가 없습니다"
+  },
+  "HeroSection": {
+    "greetingWithName": "안녕하세요, {name}님! 팀과 함께 우선순위를 정리해보세요.",
+    "greetingWithoutName": "팀과 함께 우선순위를 정리해보세요.",
+    "newTeam": "New Team",
+    "joinWithInvite": "초대 링크로 참가"
+  },
+  "ActiveTeamsSection": {
+    "title": "My Active Teams",
+    "empty": "참가중인 팀이 없습니다."
+  },
+  "TeamCard": {
+    "membersSuffix": "members"
+  },
+  "EisenhowerLogicSection": {
+    "title": "The Team Eisenhower Logic",
+    "doFirst": "Do First",
+    "doFirstLabel": "긴급 + 중요",
+    "doFirstDescription": "긴급하고 중요한 일. 즉시 실행해야 하는 핵심 과제입니다.",
+    "schedule": "Schedule",
+    "scheduleLabel": "중요 + 여유",
+    "scheduleDescription": "중요하지만 급하지 않은 일. 장기 성과를 만드는 전략 과제입니다.",
+    "delegate": "Delegate",
+    "delegateLabel": "긴급 + 덜 중요",
+    "delegateDescription": "급하지만 덜 중요한 일. 위임 또는 분산이 필요한 운영성 작업입니다.",
+    "eliminate": "Eliminate",
+    "eliminateLabel": "낮은 우선순위",
+    "eliminateDescription": "급하지도 중요하지도 않은 일. 줄이거나 제거해야 할 잡음입니다."
+  },
+  "HomeFooter": {
+    "eyebrow": "Navigate",
+    "title": "필요한 페이지로 빠르게 이동하세요",
+    "description": "홈에서 서비스 소개와 핵심 기능을 확인하고, 바로 팀에 참여하거나 내 설정 페이지로 이동할 수 있습니다.",
+    "pageLinksTitle": "페이지",
+    "pageLinksLabel": "페이지 링크",
+    "workspaceLinksTitle": "바로가기",
+    "workspaceLinksLabel": "워크스페이스 링크",
+    "links": {
+      "home": "홈",
+      "about": "About",
+      "features": "기능",
+      "join": "팀 참가",
+      "myPage": "마이페이지",
+      "login": "로그인"
+    }
+  },
+  "AboutPage": {
+    "eyebrow": "About",
+    "title": "개인적으로 쓰던 아이젠하워 매트릭스를 팀의 대화로 확장했습니다",
+    "description": "이 프로젝트는 팀 회의에서 우선순위를 정하던 경험에서 시작됐습니다. 우선순위에는 늘 여러 이유가 있고, 팀은 가장 중요한 일 하나만 붙잡고 움직일 수 없었습니다. 그래서 개인적으로 사용하던 아이젠하워 매트릭스를 팀 단위 협업 흐름으로 확장해보기로 했습니다.",
+    "primaryCta": "기능 보기",
+    "secondaryCta": "홈으로",
+    "originCard": {
+      "label": "프로젝트의 출발점",
+      "title": "우선순위의 이유를 팀이 함께 볼 수 있는 화면이 필요했습니다",
+      "description": "단순히 위에서부터 정렬된 목록으로는 왜 이 일이 지금 중요하거나 급한지 설명하기 어려웠습니다. 이 제품은 그 답답함을 줄이기 위한 시도입니다."
+    },
+    "storyTitle": "왜 만들게 되었는가",
+    "storyDescription": "실제 회의에서 반복해서 마주친 장면이 제품의 출발점이 됐습니다. 이 페이지는 그 문제의식을 그대로 담고 있습니다.",
+    "stories": {
+      "meeting": {
+        "title": "우선순위에는 하나의 이유만 있지 않았다",
+        "description": "회의에서 일을 정리하다 보면 어떤 일은 긴급해서, 어떤 일은 중요해서, 어떤 일은 다른 사람의 진행을 막고 있어서 먼저 다뤄야 했습니다. 우선순위는 항상 단일 점수로 설명되지 않았습니다."
+      },
+      "sorting": {
+        "title": "기존 방식의 정렬은 답답했다",
+        "description": "리스트를 위아래로 정렬하는 방식은 편하지만, 왜 이 일이 여기 있어야 하는지 팀이 함께 납득하기 어려웠습니다. 같은 1순위라도 이유가 다른 일들이 한 줄로 뭉개졌습니다."
+      },
+      "expansion": {
+        "title": "개인 도구를 팀 도구로 바꿔보고 싶었다",
+        "description": "개인적으로 쓰던 아이젠하워 매트릭스는 판단 기준을 분리해 보여준다는 점이 좋았습니다. 그래서 이 사고방식을 팀이 함께 쓰는 워크스페이스로 확장해보자는 생각이 들었습니다."
+      }
+    },
+    "principlesTitle": "그래서 이렇게 만들고 있습니다",
+    "principlesDescription": "단순한 할 일 목록보다, 팀이 우선순위를 설명하고 조율할 수 있는 구조를 만드는 데 집중하고 있습니다.",
+    "principles": {
+      "balance": {
+        "title": "가장 중요한 일만 보는 방식에서 벗어나기",
+        "description": "실제 팀 운영에서는 중요한 일, 급한 일, 다른 사람을 막고 있는 일, 줄여야 할 일이 동시에 존재합니다. 매트릭스는 그 차이를 한눈에 드러내기 위한 장치입니다."
+      },
+      "reason": {
+        "title": "정렬보다 판단 기준을 먼저 보이기",
+        "description": "리스트의 순서만으로는 우선순위의 이유가 사라집니다. 이 프로젝트는 일이 어디에 놓였는지와 왜 그곳에 있는지를 함께 읽을 수 있도록 만들고 있습니다."
+      },
+      "alignment": {
+        "title": "개인 메모가 아니라 팀 합의로 연결하기",
+        "description": "개인이 쓰는 생산성 도구를 그대로 복제하기보다, 팀이 함께 보고 조정하며 주간 흐름을 이어갈 수 있는 협업 경험으로 확장하고 싶었습니다."
+      }
+    },
+    "invitationTitle": "실생활에서 나온 아이디어라는 인상을 남기고 싶었습니다",
+    "invitationDescription": "이 페이지를 본 사람이 '실제 이런 문제를 겪은 사람이 만들었구나'라고 느끼길 바랍니다. 동시에 아직 더 좋아질 수 있는 제품이라는 점도 열어두고 싶습니다.",
+    "invitationCardTitle": "다음 기능은 실제 팀의 목소리에서 나오길 바랍니다",
+    "invitationCardDescription": "그래서 이 프로젝트는 완성된 정답이라기보다, 팀의 우선순위 대화를 더 잘 돕기 위한 작업에 가깝습니다.",
+    "invitationPrompts": {
+      "one": "우선순위의 이유를 더 자연스럽게 기록하려면 무엇이 필요할까",
+      "two": "팀이 정렬 근거를 더 빨리 합의하려면 어떤 인터랙션이 좋을까",
+      "three": "이번 주 실행과 지난주 맥락을 더 잘 이어주려면 무엇을 추가해야 할까"
+    },
+    "invitationFooter": "이 페이지가 기능 제안과 피드백의 시작점이 되기를 기대합니다."
+  },
+  "FeaturesPage": {
+    "eyebrow": "Features",
+    "title": "팀 운영에 필요한 기능을 한 흐름으로 묶었습니다",
+    "description": "태스크 입력, 우선순위 분류, 팀 협업, 실시간 동기화까지 주간 운영에 자주 필요한 동작을 한 제품 경험으로 연결합니다.",
+    "primaryCta": "팀 참가하기",
+    "secondaryCta": "서비스 소개 보기",
+    "gridTitle": "핵심 기능",
+    "gridDescription": "현재 제품이 제공하는 주요 기능은 팀의 우선순위 정렬과 실행 흐름에 직접 연결되는 것들로 구성되어 있습니다.",
+    "items": {
+      "matrix": {
+        "title": "아이젠하워 매트릭스",
+        "description": "태스크를 4분면으로 나눠 지금 바로 해야 할 일과 미뤄도 되는 일을 빠르게 구분합니다."
+      },
+      "team": {
+        "title": "팀 단위 워크스페이스",
+        "description": "팀별로 멤버와 태스크를 묶어 관리하고, 초대 링크로 새로운 팀원을 쉽게 참여시킬 수 있습니다."
+      },
+      "realtime": {
+        "title": "실시간 반영",
+        "description": "Firestore와 RTDB를 기반으로 태스크 상태, 접속자, 커서 위치를 거의 즉시 공유합니다."
+      },
+      "search": {
+        "title": "빠른 검색",
+        "description": "현재 사용자가 속한 팀과 태스크를 검색해 필요한 업무 맥락으로 바로 이동할 수 있습니다."
+      },
+      "tags": {
+        "title": "우선순위 태그",
+        "description": "팀별 커스텀 태그를 활용해 중요한 업무 맥락이나 분류 기준을 세밀하게 표현할 수 있습니다."
+      },
+      "weeks": {
+        "title": "주차 기반 운영",
+        "description": "이번 주와 이전 주를 구분해 보고, 미완료 태스크를 다음 주 흐름으로 자연스럽게 이어갑니다."
+      }
+    },
+    "workflowTitle": "기능은 따로 놀지 않게 설계했습니다",
+    "workflowDescription": "입력, 분류, 협업, 회고가 끊기지 않도록 각 기능을 주간 운영 흐름에 맞춰 배치했습니다. 그래서 팀은 도구 사용법보다 우선순위 결정 자체에 더 집중할 수 있습니다.",
+    "workflowCardTitle": "추천 사용 흐름",
+    "workflowCard": {
+      "steps": {
+        "capture": {
+          "title": "1. Inbox에 업무를 모읍니다",
+          "description": "새로 들어온 요청과 아이디어를 먼저 태스크로 기록합니다."
+        },
+        "align": {
+          "title": "2. 매트릭스에서 우선순위를 맞춥니다",
+          "description": "팀이 함께 드래그 앤 드롭으로 각 업무의 위치를 정리합니다."
+        },
+        "review": {
+          "title": "3. 주차 단위로 진행 상황을 돌아봅니다",
+          "description": "이번 주 결과를 확인하고, 남은 일은 다음 주 계획으로 이어갑니다."
+        }
+      }
+    }
+  },
+  "TaskForm": {
+    "titlePlaceholder": "태스크 제목",
+    "descriptionPlaceholder": "설명을 입력하세요 (선택)",
+    "assigneeLabel": "담당자",
+    "deadlineLabel": "마감일",
+    "priorityLabel": "태그",
+    "none": "없음",
+    "submit": "추가",
+    "cancel": "취소"
+  },
+  "TaskCard": {
+    "menu": "메뉴",
+    "delete": "삭제"
+  },
+  "MatrixTaskCard": {
+    "menu": "메뉴",
+    "moveToSidebar": "사이드바로 이동"
+  },
+  "TaskSidebar": {
+    "title": "Task Inbox",
+    "empty": "태스크가 없습니다"
+  },
+  "TeamHeader": {
+    "copied": "복사됨!",
+    "invite": "Invite",
+    "previousWeek": "Previous Week",
+    "home": "홈으로",
+    "tags": "태그 관리",
+    "thisWeek": "이번 주"
+  },
+  "PreviousWeekModal": {
+    "title": "이전 주차 보기",
+    "description": "이동할 주차를 선택하세요. 이전 주차는 읽기 전용으로 표시됩니다.",
+    "confirm": "이동",
+    "cancel": "취소"
+  },
+  "PriorityTagManager": {
+    "title": "우선순위 태그 관리",
+    "nameLabel": "태그 이름",
+    "colorLabel": "태그 색상",
+    "addTag": "태그 추가",
+    "empty": "태그가 없습니다",
+    "addSectionTitle": "태그 추가",
+    "namePlaceholder": "태그 이름",
+    "deleteLabel": "{label} 삭제",
+    "cancel": "취소",
+    "save": "저장",
+    "saving": "저장 중...",
+    "delete": "삭제"
+  },
+  "NewTeamModal": {
+    "title": "새 팀 만들기",
+    "namePlaceholder": "팀 이름을 입력하세요",
+    "create": "만들기",
+    "cancel": "취소"
+  },
+  "TaskEditModal": {
+    "title": "태스크 수정",
+    "titlePlaceholder": "태스크 제목",
+    "descriptionPlaceholder": "설명을 입력하세요 (선택)",
+    "assigneeLabel": "담당자",
+    "deadlineLabel": "마감일",
+    "priorityLabel": "태그",
+    "none": "없음",
+    "save": "저장",
+    "delete": "삭제",
+    "cancel": "취소"
+  },
+  "MyPage": {
+    "title": "마이페이지",
+    "save": "저장",
+    "reset": "되돌리기",
+    "signOut": "로그아웃"
+  },
+  "DisplayNameForm": {
+    "title": "Display Name",
+    "placeholder": "표시 이름을 입력하세요"
+  },
+  "AvatarSelector": {
+    "title": "아바타 선택"
+  },
+  "ThemeColorSelector": {
+    "title": "Theme Color"
+  },
+  "ColorSchemeSelector": {
+    "title": "Display Mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "LanguageSelector": {
+    "title": "언어 설정",
+    "placeholder": "언어 선택",
+    "compactLocales": {
+      "ko": "한국어",
+      "en": "영어",
+      "ja": "일본어",
+      "fr": "프랑스어",
+      "de": "독일어"
+    },
+    "locales": {
+      "ko": "한국어",
+      "en": "미국 영어",
+      "en-GB": "영국 영어",
+      "ja": "일본어",
+      "fr": "프랑스어",
+      "de": "독일어"
+    }
+  },
+  "TeamManagement": {
+    "title": "Team Management",
+    "admin": "관리자",
+    "renameLabel": "{teamName} 이름 변경",
+    "leaveLabel": "{teamName} 나가기",
+    "deleteLabel": "{teamName} 삭제",
+    "empty": "참가중인 팀이 없습니다.",
+    "deleteTitle": "팀을 삭제하시겠습니까?",
+    "deleteDescription": "{teamName} 팀을 삭제하면 모든 태스크가 함께 삭제되며 복구할 수 없습니다.",
+    "cancel": "취소",
+    "delete": "삭제"
+  },
+  "AuthGuard": {
+    "loading": "로딩 중..."
+  },
+  "LoginPage": {
+    "title": "Team Eisenhower Matrix",
+    "description": "팀과 함께 우선순위를 관리하세요",
+    "googleSignIn": "Google로 시작하기"
+  },
+  "JoinPage": {
+    "title": "팀 참가하기",
+    "description": "초대 링크 또는 초대 코드를 입력하세요.",
+    "codePlaceholder": "초대 링크 또는 코드 입력",
+    "join": "참가하기",
+    "back": "돌아가기"
+  },
+  "JoinCodePage": {
+    "loading": "초대 링크 확인 중...",
+    "invalidInvite": "유효하지 않은 초대 링크입니다.",
+    "goHome": "홈으로",
+    "invitedTeam": "초대받은 팀",
+    "joining": "참가 중...",
+    "joinTeam": "팀 참가하기"
+  },
+  "RenameTeamModal": {
+    "title": "팀 이름 변경",
+    "placeholder": "새 팀 이름",
+    "cancel": "취소",
+    "save": "저장",
+    "saving": "저장 중..."
+  },
+  "TeamPage": {
+    "loading": "팀 정보를 불러오는 중...",
+    "readOnlyBanner": "이전 주차 보기 모드 — 수정할 수 없습니다.",
+    "backToCurrentWeek": "현재 주차로 돌아가기"
+  },
+  "Week": {
+    "label": "{year}년 {month}월 {week}주차"
+  }
+}

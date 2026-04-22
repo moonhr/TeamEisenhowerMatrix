@@ -80,6 +80,42 @@ describe('toUser', () => {
       avatar: 'avatar-1',
       themeColor: 'violet',
     })
-    expect(user).toEqual({ id: 'user-1', name: '김철수', avatar: 'avatar-1', themeColor: 'violet' })
+    expect(user).toEqual({ id: 'user-1', name: '김철수', avatar: 'avatar-1', themeColor: 'violet', colorScheme: 'light' })
+  })
+
+  it('locale 값이 있으면 User 타입에 포함한다', () => {
+    const user = toUser('user-1', {
+      name: '김철수',
+      avatar: 'avatar-1',
+      themeColor: 'violet',
+      locale: 'en',
+    })
+
+    expect(user).toEqual({
+      id: 'user-1',
+      name: '김철수',
+      avatar: 'avatar-1',
+      themeColor: 'violet',
+      colorScheme: 'light',
+      locale: 'en',
+    })
+  })
+
+  it('추가 locale 값도 User 타입에 포함한다', () => {
+    const user = toUser('user-1', {
+      name: '김철수',
+      avatar: 'avatar-1',
+      themeColor: 'violet',
+      locale: 'en-GB',
+    })
+
+    expect(user).toEqual({
+      id: 'user-1',
+      name: '김철수',
+      avatar: 'avatar-1',
+      themeColor: 'violet',
+      colorScheme: 'light',
+      locale: 'en-GB',
+    })
   })
 })

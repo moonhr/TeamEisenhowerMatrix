@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
 } from '@/components/ui/dialog'
@@ -14,6 +15,7 @@ type NewTeamModalProps = {
 }
 
 export default function NewTeamModal({ open, onOpenChange, onCreate }: NewTeamModalProps) {
+  const t = useTranslations('NewTeamModal')
   const [name, setName] = useState('')
 
   const handleSubmit = () => {
@@ -26,18 +28,18 @@ export default function NewTeamModal({ open, onOpenChange, onCreate }: NewTeamMo
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle>새 팀 만들기</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
         <Input
-          placeholder="팀 이름을 입력하세요"
+          placeholder={t('namePlaceholder')}
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !e.nativeEvent.isComposing && handleSubmit()}
           autoFocus
         />
         <DialogFooter>
-          <Button variant="ghost" onClick={() => onOpenChange(false)}>취소</Button>
-          <Button onClick={handleSubmit}>만들기</Button>
+          <Button variant="ghost" onClick={() => onOpenChange(false)}>{t('cancel')}</Button>
+          <Button onClick={handleSubmit}>{t('create')}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

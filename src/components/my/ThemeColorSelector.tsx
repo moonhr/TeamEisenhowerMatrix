@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import type { ThemeColor } from '@/types'
 
@@ -18,9 +19,11 @@ type ThemeColorSelectorProps = {
 }
 
 export default function ThemeColorSelector({ selected, onChange }: ThemeColorSelectorProps) {
+  const t = useTranslations('ThemeColorSelector')
+
   return (
     <div className="space-y-3">
-      <h3 className="text-base font-semibold">Theme Color</h3>
+      <h3 className="text-base font-semibold">{t('title')}</h3>
       <div className="flex gap-3">
         {COLORS.map(({ value, bg }) => (
           <button

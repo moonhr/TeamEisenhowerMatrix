@@ -25,6 +25,30 @@ describe('weekKeyToDisplay', () => {
     // 2026-W53 or W52: Monday = Dec 28, 2026 → ceil(28/7) = 4
     expect(weekKeyToDisplay('2026-W53')).toBe('2026년 12월 4주차')
   })
+
+  it('영어 locale이면 영어 형식으로 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W17', 'en')).toBe('Week 3 of April 2026')
+  })
+
+  it('영어 locale에서도 연도 경계 주차를 올바르게 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W01', 'en')).toBe('Week 5 of December 2025')
+  })
+
+  it('영국 영어 locale도 영어 형식으로 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W17', 'en-GB')).toBe('Week 3 of April 2026')
+  })
+
+  it('일본어 locale이면 일본어 형식으로 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W17', 'ja')).toBe('2026年4月第3週')
+  })
+
+  it('프랑스어 locale이면 프랑스어 형식으로 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W17', 'fr')).toBe('Semaine 3 de avril 2026')
+  })
+
+  it('독일어 locale이면 독일어 형식으로 변환한다', () => {
+    expect(weekKeyToDisplay('2026-W17', 'de')).toBe('3. Woche im April 2026')
+  })
 })
 
 describe('dateToWeekKey', () => {

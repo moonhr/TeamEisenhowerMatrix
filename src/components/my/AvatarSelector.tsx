@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 
 type AvatarSelectorProps = {
@@ -20,9 +21,11 @@ const AVATAR_COLORS: Record<string, string> = {
 }
 
 export default function AvatarSelector({ avatars, selected, onChange }: AvatarSelectorProps) {
+  const t = useTranslations('AvatarSelector')
+
   return (
     <div className="space-y-3">
-      <h3 className="text-base font-semibold">아바타 선택</h3>
+      <h3 className="text-base font-semibold">{t('title')}</h3>
       <div className="flex flex-wrap gap-3">
         {avatars.map((avatar) => (
           <button

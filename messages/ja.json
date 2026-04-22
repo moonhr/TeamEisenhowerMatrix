@@ -1,0 +1,285 @@
+{
+  "App": {
+    "title": "Team Eisenhower Matrix",
+    "description": "チームのための優先順位管理サービス"
+  },
+  "Common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "edit": "編集",
+    "delete": "削除",
+    "create": "作成",
+    "loading": "読み込み中...",
+    "search": "検索",
+    "home": "ホーム",
+    "invite": "招待"
+  },
+  "Header": {
+    "searchPlaceholder": "検索...",
+    "login": "ログイン"
+  },
+  "Search": {
+    "loading": "検索中...",
+    "tasks": "タスク",
+    "teams": "チーム",
+    "noResults": "検索結果がありません"
+  },
+  "HeroSection": {
+    "greetingWithName": "こんにちは、{name}さん。チームと一緒に優先順位を整理しましょう。",
+    "greetingWithoutName": "チームと一緒に優先順位を整理しましょう。",
+    "newTeam": "新しいチーム",
+    "joinWithInvite": "招待リンクで参加"
+  },
+  "ActiveTeamsSection": {
+    "title": "参加中のチーム",
+    "empty": "参加中のチームはありません。"
+  },
+  "TeamCard": {
+    "membersSuffix": "人"
+  },
+  "EisenhowerLogicSection": {
+    "title": "Team Eisenhower Logic",
+    "doFirst": "最優先",
+    "doFirstLabel": "緊急 + 重要",
+    "doFirstDescription": "緊急かつ重要な仕事です。すぐに対応する必要があります。",
+    "schedule": "予定する",
+    "scheduleLabel": "重要 + 余裕あり",
+    "scheduleDescription": "重要だが緊急ではない仕事です。計画的に進めましょう。",
+    "delegate": "委任する",
+    "delegateLabel": "緊急 + 重要度低め",
+    "delegateDescription": "緊急だが重要度の低い仕事です。適切なメンバーに任せましょう。",
+    "eliminate": "やめる",
+    "eliminateLabel": "低優先度",
+    "eliminateDescription": "緊急でも重要でもない仕事です。減らすか取り除きましょう。"
+  },
+  "HomeFooter": {
+    "eyebrow": "Navigate",
+    "title": "必要なページへすばやく移動できます",
+    "description": "ホームでサービス紹介と主要機能を確認し、そのままチームへの参加や設定ページへの移動ができます。",
+    "pageLinksTitle": "ページ",
+    "pageLinksLabel": "ページリンク",
+    "workspaceLinksTitle": "ショートカット",
+    "workspaceLinksLabel": "ワークスペースリンク",
+    "links": {
+      "home": "ホーム",
+      "about": "About",
+      "features": "機能",
+      "join": "チーム参加",
+      "myPage": "マイページ",
+      "login": "ログイン"
+    }
+  },
+  "AboutPage": {
+    "eyebrow": "About",
+    "title": "個人で使っていたアイゼンハワー・マトリクスを、チームの対話へ広げました",
+    "description": "このプロジェクトは、チーム会議で優先順位を決めていた体験から始まりました。優先順位にはいつも複数の理由があり、チームは最も重要な一つの仕事だけを見て動くことはできませんでした。そこで、個人で使っていたアイゼンハワー・マトリクスを、チーム単位の協働フローへ拡張してみようと考えました。",
+    "primaryCta": "機能を見る",
+    "secondaryCta": "ホームへ",
+    "originCard": {
+      "label": "プロジェクトの出発点",
+      "title": "優先順位の理由をチームで一緒に見られる画面が必要でした",
+      "description": "上から順に並ぶだけのリストでは、なぜこの仕事が今重要なのか、なぜ急ぎなのかを説明しにくいと感じていました。このプロダクトは、そのもどかしさを減らすための試みです。"
+    },
+    "storyTitle": "なぜ作ることになったのか",
+    "storyDescription": "実際の会議で繰り返し出会った場面が、このプロダクトの出発点になりました。このページには、その問題意識をそのまま込めています。",
+    "stories": {
+      "meeting": {
+        "title": "優先順位には一つの理由しかないわけではなかった",
+        "description": "会議で仕事を整理していると、ある仕事は緊急だから、ある仕事は重要だから、また別の仕事は他の人の進行を止めているから先に扱う必要がありました。優先順位は、常に一つの点数だけでは説明できませんでした。"
+      },
+      "sorting": {
+        "title": "従来の並べ替え方には窮屈さがあった",
+        "description": "上から下へ並べるリストは便利ですが、なぜその位置にあるのかをチーム全体で納得するには不十分でした。同じ1位でも、理由の異なる仕事が一列に潰れてしまっていました。"
+      },
+      "expansion": {
+        "title": "個人の道具をチームの道具に変えてみたかった",
+        "description": "個人で使っていたアイゼンハワー・マトリクスの良さは、判断基準を分けて見せられることでした。だからこそ、この考え方をチームが一緒に使うワークスペースへ広げたいと思いました。"
+      }
+    },
+    "principlesTitle": "だから、こう作っています",
+    "principlesDescription": "単なるTo-doリストではなく、チームが優先順位を説明し、すり合わせられる構造をつくることに集中しています。",
+    "principles": {
+      "balance": {
+        "title": "最重要タスクだけを見るやり方から離れる",
+        "description": "実際のチーム運営では、重要な仕事、緊急な仕事、誰かを止めている仕事、減らすべき仕事が同時に存在します。マトリクスは、その違いを一目で見えるようにするための仕組みです。"
+      },
+      "reason": {
+        "title": "並び順より先に、判断基準を見せる",
+        "description": "リストの順番だけでは、優先順位の理由が消えてしまいます。このプロジェクトは、仕事がどこに置かれているのかと、なぜそこにあるのかを一緒に読めるようにしようとしています。"
+      },
+      "alignment": {
+        "title": "個人メモではなく、チームの合意につなげる",
+        "description": "個人向けの生産性ツールをそのまま複製するのではなく、チームが一緒に見て調整し、週次の流れを続けられる協働体験へ広げたいと考えました。"
+      }
+    },
+    "invitationTitle": "実生活から生まれたアイデアだと感じてもらいたい",
+    "invitationDescription": "このページを読んだ人に、実際にこうした問題を経験した人が作ったプロダクトだと感じてもらえたらと思っています。同時に、まだもっと良くしていける余地も残しておきたいです。",
+    "invitationCardTitle": "次の機能は、実際のチームの声から生まれてほしい",
+    "invitationCardDescription": "だからこのプロジェクトは、完成された答えというより、チームの優先順位の対話をより良く支えるための継続的な試みに近いものです。",
+    "invitationPrompts": {
+      "one": "優先順位の理由をもっと自然に記録するには何が必要だろうか",
+      "two": "並べ替えの根拠をチームがもっと早く合意するには、どんなインタラクションがよいだろうか",
+      "three": "今週の実行と先週の文脈を、もっと滑らかにつなぐには何を加えるべきだろうか"
+    },
+    "invitationFooter": "このページが、より良い機能提案やフィードバックの出発点になればと思っています。"
+  },
+  "TaskForm": {
+    "titlePlaceholder": "タスク名",
+    "descriptionPlaceholder": "説明を入力してください（任意）",
+    "assigneeLabel": "担当者",
+    "deadlineLabel": "期限",
+    "priorityLabel": "タグ",
+    "none": "なし",
+    "submit": "追加",
+    "cancel": "キャンセル"
+  },
+  "TaskCard": {
+    "menu": "メニュー",
+    "delete": "削除"
+  },
+  "MatrixTaskCard": {
+    "menu": "メニュー",
+    "moveToSidebar": "サイドバーへ移動"
+  },
+  "TaskSidebar": {
+    "title": "タスク受信箱",
+    "empty": "タスクがありません"
+  },
+  "TeamHeader": {
+    "copied": "コピーしました",
+    "invite": "招待",
+    "previousWeek": "前の週",
+    "home": "ホーム",
+    "tags": "タグ管理",
+    "thisWeek": "今週"
+  },
+  "PreviousWeekModal": {
+    "title": "過去の週を見る",
+    "description": "開く週を選択してください。過去の週は読み取り専用です。",
+    "confirm": "移動",
+    "cancel": "キャンセル"
+  },
+  "PriorityTagManager": {
+    "title": "優先度タグ管理",
+    "nameLabel": "タグ名",
+    "colorLabel": "タグ色",
+    "addTag": "タグ追加",
+    "empty": "タグがありません",
+    "addSectionTitle": "タグ追加",
+    "namePlaceholder": "タグ名",
+    "deleteLabel": "{label} を削除",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "saving": "保存中...",
+    "delete": "削除"
+  },
+  "NewTeamModal": {
+    "title": "新しいチームを作成",
+    "namePlaceholder": "チーム名を入力してください",
+    "create": "作成",
+    "cancel": "キャンセル"
+  },
+  "TaskEditModal": {
+    "title": "タスク編集",
+    "titlePlaceholder": "タスク名",
+    "descriptionPlaceholder": "説明を入力してください（任意）",
+    "assigneeLabel": "担当者",
+    "deadlineLabel": "期限",
+    "priorityLabel": "タグ",
+    "none": "なし",
+    "save": "保存",
+    "delete": "削除",
+    "cancel": "キャンセル"
+  },
+  "MyPage": {
+    "title": "マイページ",
+    "save": "保存",
+    "reset": "元に戻す",
+    "signOut": "ログアウト"
+  },
+  "DisplayNameForm": {
+    "title": "表示名",
+    "placeholder": "表示名を入力してください"
+  },
+  "AvatarSelector": {
+    "title": "アバターを選択"
+  },
+  "ThemeColorSelector": {
+    "title": "テーマカラー"
+  },
+  "ColorSchemeSelector": {
+    "title": "表示モード",
+    "light": "ライト",
+    "dark": "ダーク"
+  },
+  "LanguageSelector": {
+    "title": "言語",
+    "placeholder": "言語を選択",
+    "compactLocales": {
+      "ko": "韓国語",
+      "en": "英語",
+      "ja": "日本語",
+      "fr": "フランス語",
+      "de": "ドイツ語"
+    },
+    "locales": {
+      "ko": "韓国語",
+      "en": "英語（米国）",
+      "en-GB": "英語（英国）",
+      "ja": "日本語",
+      "fr": "フランス語",
+      "de": "ドイツ語"
+    }
+  },
+  "TeamManagement": {
+    "title": "チーム管理",
+    "admin": "管理者",
+    "renameLabel": "{teamName} の名前を変更",
+    "leaveLabel": "{teamName} から退出",
+    "deleteLabel": "{teamName} を削除",
+    "empty": "参加中のチームはありません。",
+    "deleteTitle": "このチームを削除しますか？",
+    "deleteDescription": "{teamName} を削除すると、すべてのタスクも削除され元に戻せません。",
+    "cancel": "キャンセル",
+    "delete": "削除"
+  },
+  "AuthGuard": {
+    "loading": "読み込み中..."
+  },
+  "LoginPage": {
+    "title": "Team Eisenhower Matrix",
+    "description": "チームと一緒に優先順位を管理しましょう",
+    "googleSignIn": "Googleで続行"
+  },
+  "JoinPage": {
+    "title": "チームに参加",
+    "description": "招待リンクを貼り付けるか、招待コードを入力してください。",
+    "codePlaceholder": "招待リンクまたはコードを入力",
+    "join": "参加する",
+    "back": "戻る"
+  },
+  "JoinCodePage": {
+    "loading": "招待リンクを確認中...",
+    "invalidInvite": "無効な招待リンクです。",
+    "goHome": "ホームへ",
+    "invitedTeam": "招待されたチーム",
+    "joining": "参加中...",
+    "joinTeam": "チームに参加"
+  },
+  "RenameTeamModal": {
+    "title": "チーム名変更",
+    "placeholder": "新しいチーム名",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "saving": "保存中..."
+  },
+  "TeamPage": {
+    "loading": "チーム情報を読み込み中...",
+    "readOnlyBanner": "過去週の閲覧モードです。編集はできません。",
+    "backToCurrentWeek": "今週に戻る"
+  },
+  "Week": {
+    "label": "{year}年{month}月第{week}週"
+  }
+}

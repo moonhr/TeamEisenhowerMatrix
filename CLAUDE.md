@@ -11,6 +11,7 @@
 | [데이터 모델](docs/data-model.md) | 타입 정의, weekKey 규칙, 주차 이동 규칙 |
 | [폴더 구조](docs/folder-structure.md) | src/ 디렉토리 구성 |
 | [큐 계획](docs/queue-plan.md) | Phase 1~2 전체 개발 큐 체크리스트 |
+| [i18n 계획](docs/i18n.md) | 다국어 처리 설계 (next-intl, Queue 16~18) |
 | [요구사항](README.md) | 원본 요구사항 및 페이지별 구성 |
 
 ## 핵심 규칙

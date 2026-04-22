@@ -84,6 +84,49 @@
 - [x] Previous Week 모달 (이동할 주차 선택)
 - [x] 이전 주차 read-only 처리
 
+**보강 목표**
+- 헤더의 이전 주차 진입 구조는 유지
+- 최근 8주 제한을 제거하고, 원하는 과거 주차를 직접 선택 가능하도록 확장
+- 팀별 과거 탐색 가능 범위는 DB에서 먼저 판단
+- 현재 주차와 과거 주차 상태를 URL로 동기화하여 새로고침/공유/브라우저 뒤로가기까지 일관되게 동작
+
+**1차 구현 결정**
+- 별도 `teamWeeks` 메타 컬렉션은 만들지 않고, `tasks` 컬렉션에서 해당 팀의 가장 오래된 `weekKey`를 조회해 하한선으로 사용
+- 선택 가능한 주차 범위는 `earliestWeekKey ~ currentWeekKey`
+- 중간에 태스크가 없는 빈 주차도 선택은 허용하고, 진입 후 empty state로 처리
+- 현재 주차는 canonical URL `/team/:id`, 과거 주차는 `/team/:id?week=YYYY-WNN`
+- 과거 주차는 계속 read-only 유지
+
+**UI/UX 흐름**
+- 헤더의 `Previous Week` 버튼 클릭 시 모달 오픈
+- 모달 내부는 단일 `Select` + 확인 버튼 구조로 유지
+- `Select` 옵션은 DB에서 구한 `earliestWeekKey`부터 현재 주차까지 전체 범위를 생성
+- 기본 선택값은 현재 보고 있는 `viewWeekKey`
+- 확인 시 선택한 `weekKey`로 이동
+- 현재 주차 복귀는 read-only 배너의 CTA 또는 `week` query 제거로 처리
+
+**데이터/상태 흐름**
+- `taskRepository.getEarliestWeekKey(teamId)` 추가
+- Firestore 쿼리: `where('teamId', '==', teamId)` + `orderBy('weekKey', 'asc')` + `limit(1)`
+- 팀 페이지는 로컬 `weekKey` state 대신 URL `searchParams.week`를 source of truth로 사용
+- 잘못된 `week` 값 또는 미래 주차는 현재 주차로 fallback
+- 현재 주차 선택 시에는 `?week=`를 제거해 canonical URL 유지
+
+**구현 목록**
+- [ ] `taskRepository.getEarliestWeekKey(teamId)` 추가
+- [ ] `TeamPage` 에 `earliestWeekKey` 로딩 로직 추가
+- [ ] `week.ts` 에 `isValidWeekKey`, `compareWeekKeys`, `getWeekRange` 유틸 추가
+- [ ] `TeamPage` 의 `weekKey` 로컬 state 제거 후 `searchParams.week` 기반 `viewWeekKey` 도입
+- [ ] `PreviousWeekModal` 을 최근 8주 버튼 목록에서 `Select + 확인 버튼` 구조로 변경
+- [ ] `PreviousWeekModal` 에 `earliestWeekKey`, `selectedWeekKey` props 연결
+- [ ] 현재 주차 복귀 시 `/team/:id` 로 이동하도록 정리
+- [ ] 과거 주차 empty state 문구 추가
+- [ ] TDD: `earliestWeekKey` 조회, URL query fallback, Select 옵션 범위, read-only 분기 테스트
+
+**보류 사항**
+- 실제로 태스크가 존재하는 주차만 정확히 보여줘야 하면 `teamWeeks` 인덱스 컬렉션 도입 검토
+- 1차 구현에서는 쿼리 비용과 복잡도를 줄이기 위해 하한선 조회만 수행
+
 ### Queue 12: Google 소셜 로그인
 - [x] Firebase Auth 연동
 - [x] Mock 유저 → 실제 유저 교체
@@ -152,3 +195,89 @@
 - [x] `CursorOverlay.tsx` — 타인 커서를 화살표 + 이름 태그로 렌더링 (pointer-events: none)
 - [x] `TeamPage` 에 `useCursor` 훅 + `CursorOverlay` 통합
 - [x] RTDB 스키마 문서화 (`cursors/{teamId}/{userId}`, `presence/{teamId}/{userId}`)
+
+### Queue 16: i18n 기반 셋업
+
+- [ ] `next-intl` v3 설치
+- [ ] `src/i18n/routing.ts` — `locales: ['ko', 'en']`, `defaultLocale: 'ko'`
+- [ ] `src/i18n/request.ts` — `getRequestConfig` (쿠키 `NEXT_LOCALE` 기반 locale 읽기)
+- [ ] `src/middleware.ts` — `createMiddleware` (locale 감지 → 쿠키 세팅, `localePrefix: 'never'`)
+- [ ] `messages/ko.json` — 전체 네임스페이스 초기 구조 + 한국어 문자열
+- [ ] `messages/en.json` — 전체 네임스페이스 초기 구조 + 영어 문자열
+- [ ] `next.config.ts` — `withNextIntl` 래핑
+- [ ] `app/layout.tsx` — `NextIntlClientProvider` 주입
+
+### Queue 17: 컴포넌트 문자열 추출
+
+- [ ] `HeroSection` — 인사말, 버튼 텍스트
+- [ ] `ActiveTeamsSection` — 섹션 제목, 빈 상태 메시지
+- [ ] `EisenhowerLogicSection` — 4가지 분류 설명 카드
+- [ ] `Header` — 검색 placeholder, 프로필 메뉴
+- [ ] `TaskForm` — placeholder, 레이블, 버튼
+- [ ] `TaskCard` / `MatrixTaskCard` — 상태 텍스트, 날짜 포맷
+- [ ] `TaskSidebar` / `DroppableTaskSidebar` — 섹션 제목
+- [ ] `TeamHeader` — 주차 표기, 버튼 레이블
+- [ ] `PreviousWeekModal` — 제목, 안내 문구
+- [ ] `PriorityTagManager` — 레이블, 버튼
+- [ ] `NewTeamModal` — 제목, 입력 placeholder
+- [ ] `TaskEditModal` — 레이블, 버튼
+- [ ] `my/*` 전체 (DisplayNameForm, AvatarSelector, ThemeColorSelector, ColorSchemeSelector, TeamManagement)
+- [ ] `AuthGuard`, `login/page`, `join/*` — 안내 문구
+- [ ] `week.ts` `formatWeekLabel` 함수 locale 파라미터 분기 처리
+- [ ] TDD: `formatWeekLabel` ko/en 양 언어 케이스 추가
+
+### Queue 18: 언어 설정 UI
+
+- [ ] `User` 타입에 `locale?: 'ko' | 'en'` 필드 추가
+- [ ] `LanguageSelector.tsx` 컴포넌트 (ko/en 라디오 또는 셀렉트)
+- [ ] `/my` 페이지에 언어 선택기 섹션 추가
+- [ ] `userRepository.updateUserLocale(userId, locale)` 구현
+- [ ] 저장 버튼 클릭 시 Firebase + 쿠키(`NEXT_LOCALE`) 동기화
+- [ ] TDD: locale 변경 후 쿠키 업데이트 동작 확인
+
+---
+
+## Phase 4 — Deploy (Vercel + Firebase 운영 배포)
+
+**배포 기본 전략**
+- Next.js 16 앱은 `static export` 대신 **Node.js 서버 모드**로 배포
+- 프론트엔드는 Vercel, 데이터/인증/실시간은 Firebase(Firestore/Auth/RTDB) 유지
+- 환경은 최소 `local` / `preview` / `production` 3단계로 분리
+- 브랜치 흐름은 `PR -> Preview Deploy`, `main -> Production Deploy` 기준으로 운영
+
+### Queue 19: 배포 인프라 기준선
+
+- [ ] 배포 타겟 확정: `Vercel + Firebase`
+- [ ] Vercel 프로젝트 생성 및 Git 저장소 연결
+- [ ] Firebase `dev` / `prod` 프로젝트 분리
+- [ ] Vercel Environment Variables 등록 (`NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`, `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`, `NEXT_PUBLIC_FIREBASE_DATABASE_URL`)
+- [ ] `.env.local.example` 기준 배포용 환경변수 체크리스트 문서화
+- [ ] Firebase Auth Authorized Domains 에 Preview / Production 도메인 등록
+- [ ] 커스텀 도메인 연결 전략 확정 (`app`, `www` 사용 여부 포함)
+
+### Queue 20: Firebase 운영 보안 설정
+
+- [ ] `firestore.rules` 작성 — 팀 멤버만 `tasks`, `teams` 읽기/쓰기 가능하도록 제한
+- [ ] `database.rules.json` 작성 — `presence`, `cursors` 는 본인만 쓰기, 팀 멤버만 읽기
+- [ ] `firebase.json` 에 Firestore / RTDB rules 경로 연결
+- [ ] `firestore.indexes.json` 와 rules 배포 명령 정리 (`firebase deploy --only firestore,database`)
+- [ ] Preview / Production Firebase 프로젝트별 환경변수 매핑 정리
+- [ ] Firebase App Check 도입 여부 판단 및 필요 시 적용
+
+### Queue 21: CI/CD 및 배포 게이트
+
+- [ ] `.github/workflows/ci.yml` 생성
+- [ ] PR 기준 `npm ci -> npm run lint -> npm test -> npm run build` 파이프라인 구성
+- [ ] 실패 시 merge 차단되는 required checks 설정
+- [ ] Vercel Preview Deploy 와 PR 상태 체크 연결
+- [ ] 배포 전 체크리스트 문서화 (env, auth domain, rules, indexes, build)
+- [ ] 운영 배포 runbook 초안 작성 (`docs/deployment.md`)
+
+### Queue 22: 프로덕션 배포 및 운영 검증
+
+- [ ] `main` 브랜치 production auto deploy 연결
+- [ ] 최초 배포 후 smoke test: 로그인, 팀 생성, 초대 링크, 태스크 생성, DnD, 실시간 반영, presence / cursor, i18n
+- [ ] Vercel 로그 / Firebase 콘솔 기반 장애 확인 플로우 정리
+- [ ] 롤백 절차 정리 (Vercel 이전 배포 복구 + Firebase rules 재배포)
+- [ ] 배포 후 모니터링 항목 정리 (에러율, Auth 실패, Firestore quota, RTDB 연결 수)
+- [ ] 운영 오픈 체크리스트 완료 시점 정의

@@ -1,7 +1,7 @@
 import { doc, getDoc, getDocs, setDoc, updateDoc, collection, query, where, documentId } from 'firebase/firestore'
 import { db } from './config'
 import { toUser } from './converters'
-import type { User } from '@/types'
+import type { AppLocale, User } from '@/types'
 
 const COL = 'users'
 
@@ -20,6 +20,10 @@ export async function updateUser(
   updates: Partial<Omit<User, 'id'>>
 ): Promise<void> {
   await updateDoc(doc(db, COL, userId), updates)
+}
+
+export async function updateUserLocale(userId: string, locale: AppLocale): Promise<void> {
+  await updateDoc(doc(db, COL, userId), { locale })
 }
 
 export async function getUsers(userIds: string[]): Promise<User[]> {

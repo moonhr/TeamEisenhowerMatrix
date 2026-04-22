@@ -1,6 +1,7 @@
 'use client'
 
 import { useDroppable } from '@dnd-kit/core'
+import { useTranslations } from 'next-intl'
 import DraggableTaskCard from './DraggableTaskCard'
 import TaskForm from './TaskForm'
 import { cn } from '@/lib/utils'
@@ -27,6 +28,7 @@ export default function DroppableTaskSidebar({
   onEditTask,
   onDeleteTask,
 }: DroppableTaskSidebarProps) {
+  const t = useTranslations('TaskSidebar')
   const { setNodeRef, isOver } = useDroppable({ id: 'sidebar' })
   const sidebarTasks = tasks.filter((t) => t.matrixPosition === null)
 
@@ -38,7 +40,7 @@ export default function DroppableTaskSidebar({
         isOver && 'bg-muted/40'
       )}
     >
-      <h4 className="text-sm font-semibold">Task Inbox</h4>
+      <h4 className="text-sm font-semibold">{t('title')}</h4>
       <TaskForm members={members} priorityTags={priorityTags} onSubmit={onAddTask} />
       <div className="flex-1 space-y-1 overflow-y-auto">
         {sidebarTasks.map((task) => (
@@ -54,7 +56,7 @@ export default function DroppableTaskSidebar({
         ))}
         {sidebarTasks.length === 0 && (
           <p className="py-4 text-center text-xs text-muted-foreground">
-            태스크가 없습니다
+            {t('empty')}
           </p>
         )}
       </div>

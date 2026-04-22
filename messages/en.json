@@ -1,0 +1,339 @@
+{
+  "App": {
+    "title": "Team Eisenhower Matrix",
+    "description": "Priority management for collaborative teams"
+  },
+  "Common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "loading": "Loading...",
+    "search": "Search",
+    "home": "Home",
+    "invite": "Invite"
+  },
+  "Header": {
+    "searchPlaceholder": "Search...",
+    "login": "Sign in"
+  },
+  "Search": {
+    "loading": "Searching...",
+    "tasks": "Tasks",
+    "teams": "Teams",
+    "noResults": "No results found"
+  },
+  "HeroSection": {
+    "greetingWithName": "Hello, {name}! Organize priorities with your team.",
+    "greetingWithoutName": "Organize priorities with your team.",
+    "newTeam": "New Team",
+    "joinWithInvite": "Join with invite link"
+  },
+  "ActiveTeamsSection": {
+    "title": "My Active Teams",
+    "empty": "You have not joined any teams yet."
+  },
+  "TeamCard": {
+    "membersSuffix": "members"
+  },
+  "EisenhowerLogicSection": {
+    "title": "The Team Eisenhower Logic",
+    "doFirst": "Do First",
+    "doFirstLabel": "Urgent + Important",
+    "doFirstDescription": "Handle work that is both urgent and important right away.",
+    "schedule": "Schedule",
+    "scheduleLabel": "Important + Flexible",
+    "scheduleDescription": "Plan work that is important but not urgent.",
+    "delegate": "Delegate",
+    "delegateLabel": "Urgent + Less Important",
+    "delegateDescription": "Assign urgent but less important work to the right teammate.",
+    "eliminate": "Eliminate",
+    "eliminateLabel": "Low Priority",
+    "eliminateDescription": "Remove work that is neither urgent nor important."
+  },
+  "HomeFooter": {
+    "eyebrow": "Navigate",
+    "title": "Move to the page you need quickly",
+    "description": "Browse the product overview, jump to key features, join a team, or head straight to your personal settings page.",
+    "pageLinksTitle": "Pages",
+    "pageLinksLabel": "Page links",
+    "workspaceLinksTitle": "Workspace",
+    "workspaceLinksLabel": "Workspace links",
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "features": "Features",
+      "join": "Join Team",
+      "myPage": "My Page",
+      "login": "Sign in"
+    }
+  },
+  "AboutPage": {
+    "eyebrow": "About",
+    "title": "I expanded the Eisenhower Matrix I used personally into a team conversation",
+    "description": "This project started from real team meetings about priority. Every priority had a different reason behind it, and a team could not realistically work while looking only at the single most important task. That led me to extend the Eisenhower Matrix I used for myself into a team-level collaboration flow.",
+    "primaryCta": "Explore features",
+    "secondaryCta": "Back home",
+    "originCard": {
+      "label": "Where it started",
+      "title": "The team needed a way to see the reasons behind priority together",
+      "description": "A simple top-sorted list made it hard to explain why a task mattered now, or why it was urgent. This product is an attempt to reduce that friction."
+    },
+    "storyTitle": "Why I built it",
+    "storyDescription": "The product started from scenes that kept repeating in real meetings. This page carries that problem statement directly.",
+    "stories": {
+      "meeting": {
+        "title": "Priority never came from a single reason",
+        "description": "In meetings, some work had to move first because it was urgent, some because it was important, and some because it blocked other people. Priority was never well described by one score."
+      },
+      "sorting": {
+        "title": "Traditional sorting felt limiting",
+        "description": "A list sorted from top to bottom is convenient, but it does not help a team agree on why something belongs there. Tasks with very different reasons all collapse into the same rank."
+      },
+      "expansion": {
+        "title": "I wanted to turn a personal tool into a team tool",
+        "description": "What I liked about the Eisenhower Matrix I used personally was that it separated decision criteria instead of flattening them. That made me want to expand the same thinking into a shared workspace for teams."
+      }
+    },
+    "principlesTitle": "So this is how I am building it",
+    "principlesDescription": "The focus is less on being a generic task list and more on giving teams a structure for explaining and adjusting priority together.",
+    "principles": {
+      "balance": {
+        "title": "Move beyond looking only at the top priority",
+        "description": "In real team operations, important work, urgent work, blocking work, and work that should be reduced all exist at the same time. The matrix is there to make those differences visible at a glance."
+      },
+      "reason": {
+        "title": "Show decision criteria before rank order",
+        "description": "Once work is reduced to a list order, the reasoning behind priority disappears. This project tries to make both the placement and the reason behind that placement readable."
+      },
+      "alignment": {
+        "title": "Turn personal productivity into team alignment",
+        "description": "Rather than copying a personal productivity app as-is, I wanted to extend it into a collaborative experience where a team can look together, adjust together, and carry a weekly rhythm forward."
+      }
+    },
+    "invitationTitle": "I want this to feel like an idea born from real life",
+    "invitationDescription": "Ideally, someone reading this page should feel that the product was made by a person who actually ran into this problem. At the same time, I want the page to leave room for the product to keep improving.",
+    "invitationCardTitle": "The next features should come from real team voices",
+    "invitationCardDescription": "Because of that, the project is less a finished answer and more an ongoing attempt to support better team priority conversations.",
+    "invitationPrompts": {
+      "one": "What would help a team capture the reason behind a priority more naturally?",
+      "two": "What interaction would make it easier to agree on sorting criteria quickly?",
+      "three": "What could connect this week's execution with last week's context more smoothly?"
+    },
+    "invitationFooter": "I want this page to feel like the start of better feature suggestions and feedback."
+  },
+  "FeaturesPage": {
+    "eyebrow": "Features",
+    "title": "The product bundles the parts teams need to run weekly priority decisions",
+    "description": "Task capture, prioritization, collaboration, and real-time presence are connected into one workflow so teams can spend less time coordinating tools.",
+    "primaryCta": "Join a team",
+    "secondaryCta": "Read about the product",
+    "gridTitle": "Core capabilities",
+    "gridDescription": "The current feature set focuses on the parts of weekly team execution that benefit most from shared visibility and lightweight structure.",
+    "items": {
+      "matrix": {
+        "title": "Eisenhower Matrix",
+        "description": "Split work into four quadrants and quickly distinguish what needs immediate action from what can wait."
+      },
+      "team": {
+        "title": "Team workspace",
+        "description": "Organize members and tasks by team, and bring new people in quickly with invite links."
+      },
+      "realtime": {
+        "title": "Real-time sync",
+        "description": "Keep task state, presence, and shared cursor movement updated across teammates with Firebase-backed sync."
+      },
+      "search": {
+        "title": "Fast search",
+        "description": "Search across your accessible teams and tasks so you can jump straight into the right context."
+      },
+      "tags": {
+        "title": "Priority tags",
+        "description": "Use team-level custom tags to express business context and sort work with more nuance than status alone."
+      },
+      "weeks": {
+        "title": "Week-based planning",
+        "description": "Review the current week separately from previous weeks and move unfinished work forward naturally."
+      }
+    },
+    "workflowTitle": "The features are designed to work as one flow",
+    "workflowDescription": "Capture, alignment, execution, and review are arranged to support weekly operating rhythm. The goal is to reduce tool overhead and keep attention on decisions.",
+    "workflowCardTitle": "Suggested team flow",
+    "workflowCard": {
+      "steps": {
+        "capture": {
+          "title": "1. Capture incoming work",
+          "description": "Record new requests and ideas in the inbox before deciding where they belong."
+        },
+        "align": {
+          "title": "2. Align in the matrix",
+          "description": "Use drag and drop to sort work together and decide what the team should focus on now."
+        },
+        "review": {
+          "title": "3. Review by week",
+          "description": "Look back at the current week, then carry unfinished work into the next planning cycle."
+        }
+      }
+    }
+  },
+  "TaskForm": {
+    "titlePlaceholder": "Task title",
+    "descriptionPlaceholder": "Enter a description (optional)",
+    "assigneeLabel": "Assignee",
+    "deadlineLabel": "Deadline",
+    "priorityLabel": "Tag",
+    "none": "None",
+    "submit": "Add",
+    "cancel": "Cancel"
+  },
+  "TaskCard": {
+    "menu": "Menu",
+    "delete": "Delete"
+  },
+  "MatrixTaskCard": {
+    "menu": "Menu",
+    "moveToSidebar": "Move to sidebar"
+  },
+  "TaskSidebar": {
+    "title": "Task Inbox",
+    "empty": "No tasks"
+  },
+  "TeamHeader": {
+    "copied": "Copied!",
+    "invite": "Invite",
+    "previousWeek": "Previous Week",
+    "home": "Home",
+    "tags": "Manage tags",
+    "thisWeek": "This week"
+  },
+  "PreviousWeekModal": {
+    "title": "Browse previous weeks",
+    "description": "Choose a week to open. Previous weeks are shown in read-only mode.",
+    "confirm": "Move",
+    "cancel": "Cancel"
+  },
+  "PriorityTagManager": {
+    "title": "Manage priority tags",
+    "nameLabel": "Tag name",
+    "colorLabel": "Tag color",
+    "addTag": "Add tag",
+    "empty": "No tags",
+    "addSectionTitle": "Add tag",
+    "namePlaceholder": "Tag name",
+    "deleteLabel": "Delete {label}",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "delete": "Delete"
+  },
+  "NewTeamModal": {
+    "title": "Create a new team",
+    "namePlaceholder": "Enter a team name",
+    "create": "Create",
+    "cancel": "Cancel"
+  },
+  "TaskEditModal": {
+    "title": "Edit task",
+    "titlePlaceholder": "Task title",
+    "descriptionPlaceholder": "Enter a description (optional)",
+    "assigneeLabel": "Assignee",
+    "deadlineLabel": "Deadline",
+    "priorityLabel": "Tag",
+    "none": "None",
+    "save": "Save",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "MyPage": {
+    "title": "My Page",
+    "save": "Save",
+    "reset": "Reset",
+    "signOut": "Sign out"
+  },
+  "DisplayNameForm": {
+    "title": "Display Name",
+    "placeholder": "Enter your display name"
+  },
+  "AvatarSelector": {
+    "title": "Choose Avatar"
+  },
+  "ThemeColorSelector": {
+    "title": "Theme Color"
+  },
+  "ColorSchemeSelector": {
+    "title": "Display Mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "LanguageSelector": {
+    "title": "Language",
+    "placeholder": "Select language",
+    "compactLocales": {
+      "ko": "Korean",
+      "en": "English",
+      "ja": "Japanese",
+      "fr": "French",
+      "de": "German"
+    },
+    "locales": {
+      "ko": "Korean",
+      "en": "English (US)",
+      "en-GB": "English (UK)",
+      "ja": "Japanese",
+      "fr": "French",
+      "de": "German"
+    }
+  },
+  "TeamManagement": {
+    "title": "Team Management",
+    "admin": "Admin",
+    "renameLabel": "Rename {teamName}",
+    "leaveLabel": "Leave {teamName}",
+    "deleteLabel": "Delete {teamName}",
+    "empty": "You are not in any teams.",
+    "deleteTitle": "Delete this team?",
+    "deleteDescription": "Deleting {teamName} will also remove every task and cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "AuthGuard": {
+    "loading": "Loading..."
+  },
+  "LoginPage": {
+    "title": "Team Eisenhower Matrix",
+    "description": "Manage priorities with your team",
+    "googleSignIn": "Continue with Google"
+  },
+  "JoinPage": {
+    "title": "Join a team",
+    "description": "Paste an invite link or enter an invite code.",
+    "codePlaceholder": "Enter invite link or code",
+    "join": "Join",
+    "back": "Go back"
+  },
+  "JoinCodePage": {
+    "loading": "Checking invite link...",
+    "invalidInvite": "This invite link is invalid.",
+    "goHome": "Home",
+    "invitedTeam": "Invited team",
+    "joining": "Joining...",
+    "joinTeam": "Join team"
+  },
+  "RenameTeamModal": {
+    "title": "Rename team",
+    "placeholder": "New team name",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving..."
+  },
+  "TeamPage": {
+    "loading": "Loading team information...",
+    "readOnlyBanner": "Previous week view mode. Editing is disabled.",
+    "backToCurrentWeek": "Back to current week"
+  },
+  "Week": {
+    "label": "Week {week} of {month}/{year}"
+  }
+}

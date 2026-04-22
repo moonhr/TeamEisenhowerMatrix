@@ -26,6 +26,7 @@ describe('TaskForm', () => {
     const onSubmit = jest.fn()
     render(<TaskForm members={mockMembers} onSubmit={onSubmit} />)
 
+    await userEvent.click(screen.getByPlaceholderText(/태스크 제목/i))
     await userEvent.click(screen.getByRole('button', { name: /추가/i }))
 
     expect(onSubmit).not.toHaveBeenCalled()

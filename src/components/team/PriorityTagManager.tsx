@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { X, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -21,6 +22,7 @@ type Props = {
 }
 
 export default function PriorityTagManager({ open, onOpenChange, tags, onSave }: Props) {
+  const t = useTranslations('PriorityTagManager')
   const [draft, setDraft] = useState<PriorityTag[]>(tags)
   const [newLabel, setNewLabel] = useState('')
   const [newColor, setNewColor] = useState(PRESET_COLORS[0])
@@ -52,7 +54,7 @@ export default function PriorityTagManager({ open, onOpenChange, tags, onSave }:
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>우선순위 태그 관리</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-3">
@@ -64,20 +66,19 @@ export default function PriorityTagManager({ open, onOpenChange, tags, onSave }:
                 <button
                   onClick={() => handleDelete(tag.id)}
                   className="text-muted-foreground hover:text-destructive"
-                  aria-label={`${tag.label} 삭제`}
+                  aria-label={t('deleteLabel', { label: tag.label })}
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
               </div>
             ))}
             {draft.length === 0 && (
-              <p className="text-xs text-muted-foreground text-center py-2">태그가 없습니다</p>
+              <p className="text-xs text-muted-foreground text-center py-2">{t('empty')}</p>
             )}
           </div>
 
-          {/* 태그 추가 */}
           <div className="border-t pt-3 space-y-2">
-            <p className="text-xs font-medium text-muted-foreground">태그 추가</p>
+            <p className="text-xs font-medium text-muted-foreground">{t('addSectionTitle')}</p>
             <div className="flex gap-1.5 flex-wrap">
               {PRESET_COLORS.map((c) => (
                 <button
@@ -95,21 +96,21 @@ export default function PriorityTagManager({ open, onOpenChange, tags, onSave }:
             </div>
             <div className="flex gap-2">
               <Input
-                placeholder="태그 이름"
+                placeholder={t('namePlaceholder')}
                 value={newLabel}
                 onChange={(e) => setNewLabel(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.nativeEvent.isComposing && handleAdd()}
                 className="h-8 text-sm"
               />
-              <Button size="sm" variant="outline" onClick={handleAdd} className="h-8 shrink-0" aria-label="태그 추가">
+              <Button size="sm" variant="outline" onClick={handleAdd} className="h-8 shrink-0" aria-label={t('addTag')}>
                 <Plus className="h-3.5 w-3.5" />
               </Button>
             </div>
           </div>
 
           <div className="flex justify-end gap-2 pt-1">
-            <Button variant="ghost" size="sm" onClick={() => onOpenChange(false)}>취소</Button>
-            <Button size="sm" onClick={handleSave}>저장</Button>
+            <Button variant="ghost" size="sm" onClick={() => onOpenChange(false)}>{t('cancel')}</Button>
+            <Button size="sm" onClick={handleSave}>{t('save')}</Button>
           </div>
         </div>
       </DialogContent>

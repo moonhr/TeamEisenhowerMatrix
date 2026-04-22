@@ -1,3 +1,7 @@
+export const APP_LOCALES = ['ko', 'en', 'en-GB', 'ja', 'fr', 'de'] as const
+
+export type AppLocale = typeof APP_LOCALES[number]
+
 export type ThemeColor =
   | 'violet'
   | 'blue'
@@ -14,6 +18,7 @@ export type User = {
   avatar: string
   themeColor: ThemeColor
   colorScheme: ColorScheme
+  locale?: AppLocale
 }
 
 export type PriorityTag = {

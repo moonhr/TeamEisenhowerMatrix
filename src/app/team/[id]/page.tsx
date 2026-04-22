@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from 'react'
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core'
+import { useTranslations } from 'next-intl'
 import TeamHeader from '@/components/team/TeamHeader'
 import DroppableTaskSidebar from '@/components/team/DroppableTaskSidebar'
 import DndMatrixCanvas from '@/components/team/DndMatrixCanvas'
@@ -28,6 +29,7 @@ import type { MatrixPosition, PriorityTag, Task, Team, User } from '@/types'
 type NewTaskInput = Omit<Task, 'id' | 'teamId' | 'weekKey' | 'status' | 'matrixPosition'>
 
 export default function TeamPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations('TeamPage')
   const { id } = use(params)
   const currentWeekKey = getCurrentWeekKey()
   const currentUser = useCurrentUser()
@@ -114,7 +116,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
   if (!team) {
     return (
       <div className="flex h-screen items-center justify-center text-sm text-muted-foreground">
-        팀 정보를 불러오는 중...
+        {t('loading')}
       </div>
     )
   }
@@ -132,12 +134,12 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
       {/* 이전 주차 read-only 배너 */}
       {isReadOnly && (
         <div className="flex items-center justify-between bg-amber-50 px-4 py-2 text-xs text-amber-700 border-b border-amber-200">
-          <span>📅 이전 주차 보기 모드 — 수정할 수 없습니다.</span>
+          <span>{t('readOnlyBanner')}</span>
           <button
             className="font-medium underline"
             onClick={() => setWeekKey(currentWeekKey)}
           >
-            현재 주차로 돌아가기
+            {t('backToCurrentWeek')}
           </button>
         </div>
       )}
@@ -161,7 +163,6 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
               priorityTags={priorityTags}
               onToggle={() => {}}
               onEdit={setEditingTask}
-              onMoveToSidebar={() => {}}
             />
           </main>
         </div>

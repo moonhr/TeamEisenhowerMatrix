@@ -1,4 +1,4 @@
-import type { MatrixPosition, PriorityTag, Task, TaskStatus, Team, ThemeColor, User } from '@/types'
+import { APP_LOCALES, type AppLocale, type MatrixPosition, type PriorityTag, type Task, type TaskStatus, type Team, type ThemeColor, type User } from '@/types'
 
 type RawData = Record<string, unknown>
 
@@ -34,11 +34,16 @@ export function toTeam(id: string, data: RawData): Team {
 }
 
 export function toUser(id: string, data: RawData): User {
+  const locale = typeof data.locale === 'string' && APP_LOCALES.includes(data.locale as AppLocale)
+    ? (data.locale as AppLocale)
+    : undefined
+
   return {
     id,
     name:        String(data.name ?? ''),
     avatar:      String(data.avatar ?? ''),
     themeColor:  (data.themeColor as ThemeColor) ?? 'violet',
     colorScheme: (data.colorScheme as 'light' | 'dark') ?? 'light',
+    ...(locale ? { locale } : {}),
   }
 }

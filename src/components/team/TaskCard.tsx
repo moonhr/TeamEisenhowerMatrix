@@ -1,10 +1,22 @@
 'use client'
 
-import { MoreVertical } from 'lucide-react'
+import { MoreVertical, Trash2 } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
+
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import PriorityTagBadge from './PriorityTagBadge'
 import type { PriorityTag, Task, User } from '@/types'
+
+function formatTaskDate(deadline: string, locale: string) {
+  const [year, month, day] = deadline.split('-').map(Number)
+  const date = new Date(year, month - 1, day)
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: locale === 'ko' || locale === 'ja' ? 'numeric' : 'short',
+    day: 'numeric',
+  }).format(date)
+}
 
 type TaskCardProps = {
   task: Task
@@ -15,7 +27,9 @@ type TaskCardProps = {
   onDelete: (taskId: string) => void
 }
 
-export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit }: TaskCardProps) {
+export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit, onDelete }: TaskCardProps) {
+  const t = useTranslations('TaskCard')
+  const locale = useLocale()
   const isDone = task.status === 'done'
 
   return (
@@ -24,7 +38,7 @@ export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit
         type="checkbox"
         checked={isDone}
         onChange={() => onToggle(task.id)}
-        onPointerDown={(e) => e.stopPropagation()}
+        onPointerDown={(event) => event.stopPropagation()}
         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
       />
       <div className="min-w-0 flex-1">
@@ -42,20 +56,30 @@ export default function TaskCard({ task, assignee, priorityTag, onToggle, onEdit
             </Badge>
           )}
           {task.deadline && (
-            <span className="text-xs text-muted-foreground">{task.deadline}</span>
+            <span className="text-xs text-muted-foreground">{formatTaskDate(task.deadline, locale)}</span>
           )}
         </div>
       </div>
-      {onEdit && (
+      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+        {onEdit && (
+          <button
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => onEdit(task)}
+            className="h-6 w-6 flex items-center justify-center rounded hover:bg-muted"
+            aria-label={t('menu')}
+          >
+            <MoreVertical className="h-3.5 w-3.5" />
+          </button>
+        )}
         <button
-          onPointerDown={(e) => e.stopPropagation()}
-          onClick={() => onEdit(task)}
-          className="h-6 w-6 shrink-0 flex items-center justify-center rounded opacity-0 group-hover:opacity-60 hover:opacity-100 hover:bg-muted"
-          aria-label="메뉴"
+          onPointerDown={(event) => event.stopPropagation()}
+          onClick={() => onDelete(task.id)}
+          className="h-6 w-6 flex items-center justify-center rounded hover:bg-muted"
+          aria-label={t('delete')}
         >
-          <MoreVertical className="h-3.5 w-3.5" />
+          <Trash2 className="h-3.5 w-3.5" />
         </button>
-      )}
+      </div>
     </div>
   )
 }

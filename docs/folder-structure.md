@@ -1,6 +1,10 @@
 # 폴더 구조
 
 ```
+messages/
+  ko.json                   # 한국어 메시지 (기본)
+  en.json                   # 영어 메시지
+
 src/
   app/
     page.tsx                  # / 랜딩 페이지
@@ -18,6 +22,7 @@ src/
 
   components/
     layout/
+      LanguageSelector.tsx  # 언어 선택기 (ko/en, Queue 18)
       Header.tsx              # 공통 헤더 (로고, 검색, 프로필)
     home/                     # 랜딩 페이지 섹션 컴포넌트
       HeroSection.tsx
@@ -43,6 +48,11 @@ src/
       TeamManagement.tsx
     ThemeApplier.tsx          # themeColor/colorScheme → <html> 속성 주입
     ui/                       # shadcn/ui 자동 생성 컴포넌트
+
+  i18n/
+    routing.ts              # locales, defaultLocale 상수
+    request.ts              # getRequestConfig (쿠키 기반 locale)
+  middleware.ts             # next-intl locale 감지 미들웨어
 
   hooks/
     useRealtimeTasks.ts       # Firestore onSnapshot → Zustand 동기화

@@ -1,0 +1,285 @@
+{
+  "App": {
+    "title": "Team Eisenhower Matrix",
+    "description": "Prioritätenmanagement für kollaborative Teams"
+  },
+  "Common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "create": "Erstellen",
+    "loading": "Wird geladen...",
+    "search": "Suchen",
+    "home": "Start",
+    "invite": "Einladen"
+  },
+  "Header": {
+    "searchPlaceholder": "Suchen...",
+    "login": "Anmelden"
+  },
+  "Search": {
+    "loading": "Suche läuft...",
+    "tasks": "Aufgaben",
+    "teams": "Teams",
+    "noResults": "Keine Ergebnisse gefunden"
+  },
+  "HeroSection": {
+    "greetingWithName": "Hallo, {name}! Organisiere Prioritäten mit deinem Team.",
+    "greetingWithoutName": "Organisiere Prioritäten mit deinem Team.",
+    "newTeam": "Neues Team",
+    "joinWithInvite": "Per Einladungslink beitreten"
+  },
+  "ActiveTeamsSection": {
+    "title": "Meine aktiven Teams",
+    "empty": "Du bist noch keinem Team beigetreten."
+  },
+  "TeamCard": {
+    "membersSuffix": "Mitglieder"
+  },
+  "EisenhowerLogicSection": {
+    "title": "Die Team-Eisenhower-Logik",
+    "doFirst": "Zuerst erledigen",
+    "doFirstLabel": "Dringend + Wichtig",
+    "doFirstDescription": "Dringende und wichtige Arbeit, die sofort erledigt werden muss.",
+    "schedule": "Planen",
+    "scheduleLabel": "Wichtig + Flexibel",
+    "scheduleDescription": "Wichtige, aber nicht dringende Arbeit, die geplant werden sollte.",
+    "delegate": "Delegieren",
+    "delegateLabel": "Dringend + Weniger wichtig",
+    "delegateDescription": "Dringende, aber weniger wichtige Arbeit an die passende Person delegieren.",
+    "eliminate": "Eliminieren",
+    "eliminateLabel": "Niedrige Priorität",
+    "eliminateDescription": "Arbeit, die weder dringend noch wichtig ist und entfernt werden sollte."
+  },
+  "HomeFooter": {
+    "eyebrow": "Navigate",
+    "title": "Wechsle schnell zu der Seite, die du brauchst",
+    "description": "Sieh dir auf der Startseite den Produktüberblick und die wichtigsten Funktionen an und springe dann direkt zum Teambeitritt oder zu deinen Einstellungen.",
+    "pageLinksTitle": "Seiten",
+    "pageLinksLabel": "Seitenlinks",
+    "workspaceLinksTitle": "Workspace",
+    "workspaceLinksLabel": "Workspace-Links",
+    "links": {
+      "home": "Start",
+      "about": "About",
+      "features": "Funktionen",
+      "join": "Team beitreten",
+      "myPage": "Meine Seite",
+      "login": "Anmelden"
+    }
+  },
+  "AboutPage": {
+    "eyebrow": "About",
+    "title": "Ich habe die Eisenhower-Matrix, die ich selbst genutzt habe, auf Teamgespräche erweitert",
+    "description": "Dieses Projekt entstand aus echten Teamgesprächen über Prioritäten. Hinter jeder Priorität steckten unterschiedliche Gründe, und ein Team kann nicht sinnvoll arbeiten, wenn es nur auf die eine wichtigste Aufgabe schaut. Deshalb wollte ich die Eisenhower-Matrix, die ich persönlich genutzt habe, zu einem kollaborativen Ablauf für Teams erweitern.",
+    "primaryCta": "Funktionen ansehen",
+    "secondaryCta": "Zur Startseite",
+    "originCard": {
+      "label": "Ausgangspunkt des Projekts",
+      "title": "Das Team brauchte eine Ansicht, in der die Gründe hinter Prioritäten gemeinsam sichtbar werden",
+      "description": "Eine einfache von oben nach unten sortierte Liste machte es schwer zu erklären, warum eine Aufgabe gerade jetzt wichtig oder dringend ist. Dieses Produkt ist ein Versuch, genau diese Reibung zu verringern."
+    },
+    "storyTitle": "Warum ich es gebaut habe",
+    "storyDescription": "Das Produkt begann mit Situationen, die in echten Meetings immer wieder auftauchten. Diese Seite trägt genau dieses Problemverständnis.",
+    "stories": {
+      "meeting": {
+        "title": "Priorität hatte nie nur einen einzigen Grund",
+        "description": "In Meetings musste manche Arbeit zuerst vorankommen, weil sie dringend war, andere weil sie wichtig war und wieder andere, weil sie andere blockierte. Priorität ließ sich nie sinnvoll auf nur einen Wert reduzieren."
+      },
+      "sorting": {
+        "title": "Klassische Sortierung fühlte sich zu eng an",
+        "description": "Eine von oben nach unten sortierte Liste ist praktisch, hilft einem Team aber nicht dabei, sich auf den Grund für diese Einordnung zu einigen. Aufgaben mit sehr unterschiedlichen Begründungen landeten alle in derselben Rangfolge."
+      },
+      "expansion": {
+        "title": "Ich wollte aus einem persönlichen Werkzeug ein Teamwerkzeug machen",
+        "description": "Was ich an der Eisenhower-Matrix mochte, die ich selbst genutzt habe, war die Trennung der Entscheidungsmaßstäbe statt ihrer Verflachung. Genau diese Denkweise wollte ich auf einen gemeinsamen Workspace für Teams ausweiten."
+      }
+    },
+    "principlesTitle": "Darum baue ich es so",
+    "principlesDescription": "Im Fokus steht weniger eine generische Aufgabenliste als vielmehr eine Struktur, mit der Teams Prioritäten gemeinsam erklären und anpassen können.",
+    "principles": {
+      "balance": {
+        "title": "Weg vom Blick nur auf die oberste Priorität",
+        "description": "Im echten Teamalltag existieren wichtige Arbeit, dringende Arbeit, blockierende Arbeit und Arbeit, die reduziert werden sollte, gleichzeitig. Die Matrix soll diese Unterschiede auf einen Blick sichtbar machen."
+      },
+      "reason": {
+        "title": "Entscheidungskriterien vor der Rangfolge sichtbar machen",
+        "description": "Sobald Arbeit nur noch als Listenreihenfolge erscheint, verschwindet der Grund hinter der Priorität. Dieses Projekt versucht, sowohl die Position als auch den Grund für diese Position lesbar zu machen."
+      },
+      "alignment": {
+        "title": "Persönliche Produktivität in Teamabstimmung übersetzen",
+        "description": "Statt eine persönliche Produktivitäts-App einfach zu kopieren, wollte ich sie zu einer kollaborativen Erfahrung erweitern, in der ein Team gemeinsam schaut, gemeinsam anpasst und einen Wochenrhythmus weiterträgt."
+      }
+    },
+    "invitationTitle": "Es soll sich wie eine Idee aus dem echten Leben anfühlen",
+    "invitationDescription": "Idealerweise soll jemand beim Lesen dieser Seite spüren, dass das Produkt von einer Person gebaut wurde, die dieses Problem selbst erlebt hat. Gleichzeitig soll die Seite offenlassen, dass das Produkt noch weiter wachsen kann.",
+    "invitationCardTitle": "Die nächsten Funktionen sollten aus echten Teamstimmen entstehen",
+    "invitationCardDescription": "Darum ist dieses Projekt weniger eine fertige Antwort als vielmehr ein fortlaufender Versuch, bessere Gespräche über Prioritäten im Team zu unterstützen.",
+    "invitationPrompts": {
+      "one": "Was würde einem Team helfen, den Grund hinter einer Priorität natürlicher festzuhalten?",
+      "two": "Welche Interaktion würde es leichter machen, sich schneller auf Sortierkriterien zu einigen?",
+      "three": "Was könnte die Ausführung dieser Woche besser mit dem Kontext der letzten Woche verbinden?"
+    },
+    "invitationFooter": "Ich möchte, dass diese Seite der Ausgangspunkt für bessere Funktionsideen und hilfreicheres Feedback wird."
+  },
+  "TaskForm": {
+    "titlePlaceholder": "Aufgabentitel",
+    "descriptionPlaceholder": "Beschreibung eingeben (optional)",
+    "assigneeLabel": "Zuständig",
+    "deadlineLabel": "Fälligkeitsdatum",
+    "priorityLabel": "Tag",
+    "none": "Keine",
+    "submit": "Hinzufügen",
+    "cancel": "Abbrechen"
+  },
+  "TaskCard": {
+    "menu": "Menü",
+    "delete": "Löschen"
+  },
+  "MatrixTaskCard": {
+    "menu": "Menü",
+    "moveToSidebar": "In die Seitenleiste verschieben"
+  },
+  "TaskSidebar": {
+    "title": "Aufgaben-Posteingang",
+    "empty": "Keine Aufgaben"
+  },
+  "TeamHeader": {
+    "copied": "Kopiert!",
+    "invite": "Einladen",
+    "previousWeek": "Vorherige Woche",
+    "home": "Start",
+    "tags": "Tags verwalten",
+    "thisWeek": "Diese Woche"
+  },
+  "PreviousWeekModal": {
+    "title": "Frühere Wochen durchsuchen",
+    "description": "Wähle eine Woche zum Öffnen aus. Frühere Wochen sind schreibgeschützt.",
+    "confirm": "Wechseln",
+    "cancel": "Abbrechen"
+  },
+  "PriorityTagManager": {
+    "title": "Prioritäts-Tags verwalten",
+    "nameLabel": "Tag-Name",
+    "colorLabel": "Tag-Farbe",
+    "addTag": "Tag hinzufügen",
+    "empty": "Keine Tags",
+    "addSectionTitle": "Tag hinzufügen",
+    "namePlaceholder": "Tag-Name",
+    "deleteLabel": "{label} löschen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "saving": "Speichert...",
+    "delete": "Löschen"
+  },
+  "NewTeamModal": {
+    "title": "Neues Team erstellen",
+    "namePlaceholder": "Teamnamen eingeben",
+    "create": "Erstellen",
+    "cancel": "Abbrechen"
+  },
+  "TaskEditModal": {
+    "title": "Aufgabe bearbeiten",
+    "titlePlaceholder": "Aufgabentitel",
+    "descriptionPlaceholder": "Beschreibung eingeben (optional)",
+    "assigneeLabel": "Zuständig",
+    "deadlineLabel": "Fälligkeitsdatum",
+    "priorityLabel": "Tag",
+    "none": "Keine",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "cancel": "Abbrechen"
+  },
+  "MyPage": {
+    "title": "Meine Seite",
+    "save": "Speichern",
+    "reset": "Zurücksetzen",
+    "signOut": "Abmelden"
+  },
+  "DisplayNameForm": {
+    "title": "Anzeigename",
+    "placeholder": "Anzeigenamen eingeben"
+  },
+  "AvatarSelector": {
+    "title": "Avatar auswählen"
+  },
+  "ThemeColorSelector": {
+    "title": "Themenfarbe"
+  },
+  "ColorSchemeSelector": {
+    "title": "Anzeigemodus",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "LanguageSelector": {
+    "title": "Sprache",
+    "placeholder": "Sprache auswählen",
+    "compactLocales": {
+      "ko": "Koreanisch",
+      "en": "Englisch",
+      "ja": "Japanisch",
+      "fr": "Französisch",
+      "de": "Deutsch"
+    },
+    "locales": {
+      "ko": "Koreanisch",
+      "en": "Englisch (USA)",
+      "en-GB": "Englisch (UK)",
+      "ja": "Japanisch",
+      "fr": "Französisch",
+      "de": "Deutsch"
+    }
+  },
+  "TeamManagement": {
+    "title": "Teamverwaltung",
+    "admin": "Admin",
+    "renameLabel": "{teamName} umbenennen",
+    "leaveLabel": "{teamName} verlassen",
+    "deleteLabel": "{teamName} löschen",
+    "empty": "Du bist in keinem Team.",
+    "deleteTitle": "Dieses Team löschen?",
+    "deleteDescription": "Beim Löschen von {teamName} werden auch alle Aufgaben entfernt und dies kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "delete": "Löschen"
+  },
+  "AuthGuard": {
+    "loading": "Wird geladen..."
+  },
+  "LoginPage": {
+    "title": "Team Eisenhower Matrix",
+    "description": "Verwalte Prioritäten mit deinem Team",
+    "googleSignIn": "Mit Google fortfahren"
+  },
+  "JoinPage": {
+    "title": "Team beitreten",
+    "description": "Füge einen Einladungslink ein oder gib einen Einladungscode ein.",
+    "codePlaceholder": "Einladungslink oder Code eingeben",
+    "join": "Beitreten",
+    "back": "Zurück"
+  },
+  "JoinCodePage": {
+    "loading": "Einladungslink wird geprüft...",
+    "invalidInvite": "Dieser Einladungslink ist ungültig.",
+    "goHome": "Zur Startseite",
+    "invitedTeam": "Eingeladenes Team",
+    "joining": "Beitritt läuft...",
+    "joinTeam": "Team beitreten"
+  },
+  "RenameTeamModal": {
+    "title": "Team umbenennen",
+    "placeholder": "Neuer Teamname",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "saving": "Speichert..."
+  },
+  "TeamPage": {
+    "loading": "Teaminformationen werden geladen...",
+    "readOnlyBanner": "Ansicht einer früheren Woche. Bearbeitung ist deaktiviert.",
+    "backToCurrentWeek": "Zur aktuellen Woche zurück"
+  },
+  "Week": {
+    "label": "Woche {week} von {month}/{year}"
+  }
+}

@@ -1,3 +1,7 @@
+import type { AppLocale } from '@/types'
+
+export type WeekLocale = AppLocale
+
 function getMondayOfISOWeek(isoYear: number, isoWeek: number): Date {
   // Jan 4 is always in ISO W01
   const jan4 = new Date(isoYear, 0, 4)
@@ -8,7 +12,7 @@ function getMondayOfISOWeek(isoYear: number, isoWeek: number): Date {
   return monday
 }
 
-export function weekKeyToDisplay(weekKey: string): string {
+export function weekKeyToDisplay(weekKey: string, locale: WeekLocale = 'ko'): string {
   const [yearStr, weekStr] = weekKey.split('-W')
   const isoYear = parseInt(yearStr)
   const isoWeek = parseInt(weekStr)
@@ -17,6 +21,25 @@ export function weekKeyToDisplay(weekKey: string): string {
   const year = monday.getFullYear()
   const month = monday.getMonth() + 1
   const weekOfMonth = Math.ceil(monday.getDate() / 7)
+
+  if (locale === 'ja') {
+    return `${year}年${month}月第${weekOfMonth}週`
+  }
+
+  if (locale === 'fr') {
+    const monthLabel = new Intl.DateTimeFormat('fr', { month: 'long' }).format(new Date(year, month - 1, 1))
+    return `Semaine ${weekOfMonth} de ${monthLabel} ${year}`
+  }
+
+  if (locale === 'de') {
+    const monthLabel = new Intl.DateTimeFormat('de', { month: 'long' }).format(new Date(year, month - 1, 1))
+    return `${weekOfMonth}. Woche im ${monthLabel} ${year}`
+  }
+
+  if (locale === 'en' || locale === 'en-GB') {
+    const monthLabel = new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date(year, month - 1, 1))
+    return `Week ${weekOfMonth} of ${monthLabel} ${year}`
+  }
 
   return `${year}년 ${month}월 ${weekOfMonth}주차`
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import TaskForm from './TaskForm'
 import TaskCard from './TaskCard'
 import type { PriorityTag, Task, User } from '@/types'
@@ -25,11 +26,12 @@ export default function TaskSidebar({
   onEditTask,
   onDeleteTask,
 }: TaskSidebarProps) {
+  const t = useTranslations('TaskSidebar')
   const sidebarTasks = tasks.filter((t) => t.matrixPosition === null)
 
   return (
     <aside className="flex h-full w-72 shrink-0 flex-col gap-3 border-r p-3">
-      <h4 className="text-sm font-semibold">Task Inbox</h4>
+      <h4 className="text-sm font-semibold">{t('title')}</h4>
       <TaskForm members={members} priorityTags={priorityTags} onSubmit={onAddTask} />
       <div className="flex-1 space-y-1 overflow-y-auto">
         {sidebarTasks.map((task) => (
@@ -45,7 +47,7 @@ export default function TaskSidebar({
         ))}
         {sidebarTasks.length === 0 && (
           <p className="py-4 text-center text-xs text-muted-foreground">
-            태스크가 없습니다
+            {t('empty')}
           </p>
         )}
       </div>

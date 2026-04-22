@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ type RenameTeamModalProps = {
 }
 
 export default function RenameTeamModal({ open, currentName, onOpenChange, onRename }: RenameTeamModalProps) {
+  const t = useTranslations('RenameTeamModal')
   const [name, setName] = useState(currentName)
   const [saving, setSaving] = useState(false)
 
@@ -33,24 +35,24 @@ export default function RenameTeamModal({ open, currentName, onOpenChange, onRen
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>팀 이름 변경</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="새 팀 이름"
+            placeholder={t('placeholder')}
             autoFocus
           />
           <DialogFooter>
             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>
-              취소
+              {t('cancel')}
             </Button>
             <Button
               type="submit"
               disabled={!name.trim() || name.trim() === currentName || saving}
             >
-              {saving ? '저장 중...' : '저장'}
+              {saving ? t('saving') : t('save')}
             </Button>
           </DialogFooter>
         </form>

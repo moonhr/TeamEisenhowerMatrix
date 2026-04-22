@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import Header from '@/components/layout/Header'
 import DisplayNameForm from '@/components/my/DisplayNameForm'
 import AvatarSelector from '@/components/my/AvatarSelector'
@@ -17,6 +18,7 @@ import { updateUser, getUsers } from '@/lib/firebase/userRepository'
 import type { Team, ThemeColor, ColorScheme, User } from '@/types'
 
 export default function MyPage() {
+  const t = useTranslations('MyPage')
   const { currentUser, setCurrentUser, signOut } = useAuth()
   const router = useRouter()
   const [teams, setTeams] = useState<Team[]>([])
@@ -69,9 +71,16 @@ export default function MyPage() {
 
   const handleSave = async () => {
     if (!currentUser || !form.name.trim()) return
-    const updates = { ...form, name: form.name.trim() }
-    setCurrentUser({ ...currentUser, ...updates })
-    await updateUser(currentUser.id, updates)
+    const profileUpdates = {
+      name: form.name.trim(),
+      avatar: form.avatar,
+      themeColor: form.themeColor,
+      colorScheme: form.colorScheme,
+    }
+
+    setCurrentUser({ ...currentUser, ...profileUpdates })
+
+    await updateUser(currentUser.id, profileUpdates)
   }
 
   const handleReset = () => {
@@ -124,11 +133,11 @@ export default function MyPage() {
         <div className="mt-10 flex items-center justify-between border-t pt-6">
           <div className="flex items-center gap-3">
             <Button onClick={handleSave} disabled={!isDirty}>
-              저장
+              {t('save')}
             </Button>
             {isDirty && (
               <Button variant="ghost" onClick={handleReset}>
-                되돌리기
+                {t('reset')}
               </Button>
             )}
           </div>
@@ -136,7 +145,7 @@ export default function MyPage() {
             variant="outline"
             onClick={async () => { await signOut(); router.push('/') }}
           >
-            로그아웃
+            {t('signOut')}
           </Button>
         </div>
       </main>

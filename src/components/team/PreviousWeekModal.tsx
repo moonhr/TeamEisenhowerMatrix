@@ -1,10 +1,11 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { getPreviousWeeks, weekKeyToDisplay } from '@/lib/utils/week'
+import { getPreviousWeeks, weekKeyToDisplay, type WeekLocale } from '@/lib/utils/week'
 
 type PreviousWeekModalProps = {
   open: boolean
@@ -21,14 +22,17 @@ export default function PreviousWeekModal({
   onOpenChange,
   onSelect,
 }: PreviousWeekModalProps) {
+  const t = useTranslations('PreviousWeekModal')
+  const locale = useLocale() as WeekLocale
   const weeks = getPreviousWeeks(currentWeekKey, WEEK_COUNT)
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-xs">
         <DialogHeader>
-          <DialogTitle>이전 주차 보기</DialogTitle>
+          <DialogTitle>{t('title')}</DialogTitle>
         </DialogHeader>
+        <p className="text-sm text-muted-foreground">{t('description')}</p>
         <div className="flex flex-col gap-1">
           {weeks.map((weekKey) => (
             <Button
@@ -37,7 +41,7 @@ export default function PreviousWeekModal({
               className="justify-start"
               onClick={() => { onSelect(weekKey); onOpenChange(false) }}
             >
-              {weekKeyToDisplay(weekKey)}
+              {weekKeyToDisplay(weekKey, locale)}
             </Button>
           ))}
         </div>
