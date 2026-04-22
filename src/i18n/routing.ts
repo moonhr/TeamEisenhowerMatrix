@@ -9,12 +9,6 @@ export const routing = defineRouting({
   locales,
   defaultLocale,
   localePrefix: 'never',
-  localeDetection: true,
-  localeCookie: {
-    name: 'NEXT_LOCALE',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 365,
-  },
 })
 
 export function hasLocale(locale: string | undefined): locale is AppLocale {

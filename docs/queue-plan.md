@@ -207,7 +207,7 @@
 - [x] `next-intl` 설치 (`next-intl` v4.9.1)
 - [x] `src/i18n/routing.ts` — locale 목록 및 `defaultLocale: 'ko'` 설정
 - [x] `src/i18n/request.ts` — `getRequestConfig` (쿠키 `NEXT_LOCALE` 기반 locale 읽기)
-- [x] `src/proxy.ts` — `createMiddleware` 기반 locale 감지 및 쿠키 세팅 (`localePrefix: 'never'`)
+- [x] `src/proxy.ts` — custom proxy 기반 첫 방문 locale 감지 및 `NEXT_LOCALE` 쿠키 세팅
 - [x] `messages/ko.json` — 전체 네임스페이스 초기 구조 + 한국어 문자열
 - [x] `messages/en.json` — 전체 네임스페이스 초기 구조 + 영어 문자열
 - [x] `next.config.ts` — `withNextIntl` 래핑

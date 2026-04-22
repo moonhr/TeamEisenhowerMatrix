@@ -29,7 +29,10 @@
     "greetingWithName": "Hello, {name}! Organize priorities with your team.",
     "greetingWithoutName": "Organize priorities with your team.",
     "newTeam": "New Team",
-    "joinWithInvite": "Join with invite link"
+    "joinWithInvite": "Join with invite link",
+    "previewLabel": "Live Product Preview",
+    "previewAlt": "A screenshot of the Team Eisenhower app",
+    "previewCaption": "A quick look at the board where teams sort what matters this week."
   },
   "ActiveTeamsSection": {
     "title": "My Active Teams",

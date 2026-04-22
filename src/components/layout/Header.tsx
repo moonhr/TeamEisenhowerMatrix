@@ -94,7 +94,7 @@ export default function Header() {
             className="size-7 shrink-0 bg-primary"
             style={BRAND_ICON_STYLE}
           />
-          <span>Team Eisenhower</span>
+          <span className='hidden md:block'>Team Eisenhower</span>
         </Link>
 
         {user && (

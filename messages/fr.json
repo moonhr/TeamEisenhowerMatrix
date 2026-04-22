@@ -29,7 +29,10 @@
     "greetingWithName": "Bonjour, {name} ! Organisez les priorités avec votre équipe.",
     "greetingWithoutName": "Organisez les priorités avec votre équipe.",
     "newTeam": "Nouvelle équipe",
-    "joinWithInvite": "Rejoindre avec un lien d'invitation"
+    "joinWithInvite": "Rejoindre avec un lien d'invitation",
+    "previewLabel": "Aperçu du produit",
+    "previewAlt": "Une capture d'écran de l'application Team Eisenhower",
+    "previewCaption": "Un aperçu rapide du tableau où l'équipe trie les priorités de la semaine."
   },
   "ActiveTeamsSection": {
     "title": "Mes équipes actives",

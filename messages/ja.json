@@ -29,7 +29,10 @@
     "greetingWithName": "こんにちは、{name}さん。チームと一緒に優先順位を整理しましょう。",
     "greetingWithoutName": "チームと一緒に優先順位を整理しましょう。",
     "newTeam": "新しいチーム",
-    "joinWithInvite": "招待リンクで参加"
+    "joinWithInvite": "招待リンクで参加",
+    "previewLabel": "実際の画面プレビュー",
+    "previewAlt": "Team Eisenhower の実際の画面キャプチャ",
+    "previewCaption": "チームが今週の優先順位をひと目で整理できるボードをそのまま確認できます。"
   },
   "ActiveTeamsSection": {
     "title": "参加中のチーム",

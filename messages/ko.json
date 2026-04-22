@@ -29,7 +29,10 @@
     "greetingWithName": "안녕하세요, {name}님! 팀과 함께 우선순위를 정리해보세요.",
     "greetingWithoutName": "팀과 함께 우선순위를 정리해보세요.",
     "newTeam": "New Team",
-    "joinWithInvite": "초대 링크로 참가"
+    "joinWithInvite": "초대 링크로 참가",
+    "previewLabel": "실제 화면 미리보기",
+    "previewAlt": "Team Eisenhower 실제 화면 캡처",
+    "previewCaption": "팀이 한눈에 이번 주 우선순위를 정리하는 보드를 바로 볼 수 있어요."
   },
   "ActiveTeamsSection": {
     "title": "My Active Teams",
