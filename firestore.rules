@@ -1,0 +1,183 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userId() {
+      return request.auth.uid;
+    }
+
+    function teamPath(teamId) {
+      return /databases/$(database)/documents/teams/$(teamId);
+    }
+
+    function teamExists(teamId) {
+      return exists(teamPath(teamId));
+    }
+
+    function teamData(teamId) {
+      return get(teamPath(teamId)).data;
+    }
+
+    function isTeamMemberById(teamId) {
+      return signedIn()
+        && teamExists(teamId)
+        && teamData(teamId).memberIds.hasAny([userId()]);
+    }
+
+    function isTeamMember(team) {
+      return signedIn() && team.memberIds.hasAny([userId()]);
+    }
+
+    function isTeamCreator(team) {
+      return signedIn() && team.creatorId == userId();
+    }
+
+    function validTeamCreate() {
+      return request.resource.data.keys().hasAll([
+          'name',
+          'memberIds',
+          'creatorId',
+          'inviteCode',
+          'priorityTags',
+          'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'name',
+          'memberIds',
+          'creatorId',
+          'inviteCode',
+          'priorityTags',
+          'createdAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.memberIds is list
+        && request.resource.data.memberIds.size() == 1
+        && request.resource.data.memberIds.hasAny([userId()])
+        && request.resource.data.creatorId == userId()
+        && request.resource.data.inviteCode is string
+        && request.resource.data.priorityTags is list;
+    }
+
+    function teamChangedKeys() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    function validSelfJoin() {
+      return signedIn()
+        && teamChangedKeys().hasOnly(['memberIds'])
+        && !resource.data.memberIds.hasAny([userId()])
+        && request.resource.data.memberIds.hasAny([userId()])
+        && request.resource.data.memberIds.size() == resource.data.memberIds.size() + 1
+        && request.resource.data.memberIds.hasAll(resource.data.memberIds);
+    }
+
+    function validSelfLeave() {
+      return signedIn()
+        && teamChangedKeys().hasOnly(['memberIds'])
+        && resource.data.memberIds.hasAny([userId()])
+        && !request.resource.data.memberIds.hasAny([userId()])
+        && request.resource.data.memberIds.size() == resource.data.memberIds.size() - 1
+        && resource.data.memberIds.hasAll(request.resource.data.memberIds);
+    }
+
+    function validCreatorManagedUpdate() {
+      return isTeamCreator(resource.data)
+        && teamChangedKeys().hasOnly(['name', 'priorityTags'])
+        && request.resource.data.creatorId == resource.data.creatorId
+        && request.resource.data.inviteCode == resource.data.inviteCode
+        && request.resource.data.memberIds == resource.data.memberIds;
+    }
+
+    function validMemberManagedUpdate() {
+      return isTeamMember(resource.data)
+        && teamChangedKeys().hasOnly(['priorityTags'])
+        && request.resource.data.creatorId == resource.data.creatorId
+        && request.resource.data.inviteCode == resource.data.inviteCode
+        && request.resource.data.memberIds == resource.data.memberIds
+        && request.resource.data.name == resource.data.name;
+    }
+
+    function validTaskCreate() {
+      return request.resource.data.keys().hasAll([
+          'teamId',
+          'weekKey',
+          'title',
+          'description',
+          'assigneeId',
+          'deadline',
+          'status',
+          'matrixPosition',
+          'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'teamId',
+          'weekKey',
+          'title',
+          'description',
+          'assigneeId',
+          'deadline',
+          'status',
+          'matrixPosition',
+          'priorityTagId',
+          'createdAt'
+        ])
+        && request.resource.data.teamId is string
+        && request.resource.data.weekKey is string
+        && request.resource.data.title is string
+        && request.resource.data.description is string
+        && request.resource.data.assigneeId is string
+        && request.resource.data.deadline is string
+        && request.resource.data.status in ['todo', 'done']
+        && request.resource.data.matrixPosition in ['do', 'schedule', 'delegate', 'eliminate', null]
+        && (
+          !request.resource.data.keys().hasAny(['priorityTagId'])
+          || request.resource.data.priorityTagId is string
+        );
+    }
+
+    function validTaskUpdate() {
+      return request.resource.data.teamId == resource.data.teamId
+        && request.resource.data.weekKey == resource.data.weekKey
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'title',
+          'description',
+          'assigneeId',
+          'deadline',
+          'status',
+          'matrixPosition',
+          'priorityTagId'
+        ])
+        && request.resource.data.status in ['todo', 'done']
+        && request.resource.data.matrixPosition in ['do', 'schedule', 'delegate', 'eliminate', null]
+        && (
+          !request.resource.data.keys().hasAny(['priorityTagId'])
+          || request.resource.data.priorityTagId is string
+        );
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create: if signedIn() && uid == userId();
+      allow update, delete: if signedIn() && uid == userId();
+    }
+
+    match /teams/{teamId} {
+      allow read: if isTeamMember(resource.data);
+      allow create: if signedIn() && validTeamCreate();
+      allow update: if validSelfJoin() || validSelfLeave() || validCreatorManagedUpdate() || validMemberManagedUpdate();
+      allow delete: if isTeamCreator(resource.data);
+    }
+
+    match /tasks/{taskId} {
+      allow read: if isTeamMemberById(resource.data.teamId);
+      allow create: if isTeamMemberById(request.resource.data.teamId) && validTaskCreate();
+      allow update: if isTeamMemberById(resource.data.teamId) && validTaskUpdate();
+      allow delete: if isTeamMemberById(resource.data.teamId);
+    }
+  }
+}

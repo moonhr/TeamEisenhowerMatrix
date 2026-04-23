@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "team-eisenhower-dev",
+    "dev": "team-eisenhower-dev",
+    "prod": "team-eisenhower"
+  }
+}
