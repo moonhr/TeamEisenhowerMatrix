@@ -253,37 +253,45 @@
 
 ### Queue 19: 배포 인프라 기준선
 
-- [ ] 배포 타겟 확정: `Vercel + Firebase`
-- [ ] Vercel 프로젝트 생성 및 Git 저장소 연결
-- [ ] Firebase `dev` / `prod` 프로젝트 분리
-- [ ] Vercel Environment Variables 등록 (`NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`, `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`, `NEXT_PUBLIC_FIREBASE_DATABASE_URL`)
-- [ ] `.env.local.example` 기준 배포용 환경변수 체크리스트 문서화
+- [x] 배포 타겟 확정: `Vercel + Firebase`
+- [x] Vercel 프로젝트 생성 (`team-eisenhower-matrix`)
+- [x] Vercel 프로젝트와 Git 저장소 자동 연결
+- [x] Firebase `dev` / `prod` 프로젝트 분리 (`team-eisenhower-dev` 생성, `.firebaserc` alias 구성)
+- [x] Vercel Environment Variables 등록 (`NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`, `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`, `NEXT_PUBLIC_FIREBASE_DATABASE_URL`)
+- [x] `.env.local.example` 기준 배포용 환경변수 체크리스트 문서화
 - [ ] Firebase Auth Authorized Domains 에 Preview / Production 도메인 등록
-- [ ] 커스텀 도메인 연결 전략 확정 (`app`, `www` 사용 여부 포함)
+- [x] 커스텀 도메인 연결 전략 확정 (`docs/deployment.md`)
+- [x] Vercel Preview / Development env 를 Firebase dev 프로젝트 값으로 전환
+- [x] Firebase dev Firestore `(default)` 생성 및 초기화
 
 ### Queue 20: Firebase 운영 보안 설정
 
-- [ ] `firestore.rules` 작성 — 팀 멤버만 `tasks`, `teams` 읽기/쓰기 가능하도록 제한
-- [ ] `database.rules.json` 작성 — `presence`, `cursors` 는 본인만 쓰기, 팀 멤버만 읽기
-- [ ] `firebase.json` 에 Firestore / RTDB rules 경로 연결
-- [ ] `firestore.indexes.json` 와 rules 배포 명령 정리 (`firebase deploy --only firestore,database`)
-- [ ] Preview / Production Firebase 프로젝트별 환경변수 매핑 정리
-- [ ] Firebase App Check 도입 여부 판단 및 필요 시 적용
+- [x] `firestore.rules` 작성 — 팀 멤버만 `tasks`, `teams` 읽기/쓰기 가능하도록 제한
+- [x] `database.rules.json` 작성 — `presence`, `cursors` 는 본인만 쓰기, 팀 멤버만 읽기
+- [x] `firebase.json` 에 Firestore / RTDB rules 경로 연결
+- [x] `firestore.indexes.json` 와 rules 배포 명령 정리 (`docs/deployment.md`)
+- [x] Preview / Production Firebase 프로젝트별 환경변수 매핑 정리 (`docs/deployment.md`)
+- [x] Firebase App Check 도입 여부 판단 (`defer`, `docs/deployment.md`)
+- [x] Firebase rules production 배포
+- [x] Firebase rules dev 배포
+- [x] RTDB `teamMembers` 백필
+- [ ] RTDB `teamMembers` 서버 측 동기화 전환
 
 ### Queue 21: CI/CD 및 배포 게이트
 
-- [ ] `.github/workflows/ci.yml` 생성
-- [ ] PR 기준 `npm ci -> npm run lint -> npm test -> npm run build` 파이프라인 구성
+- [x] `.github/workflows/ci.yml` 생성
+- [x] PR 기준 `npm ci -> npm run lint -> npm test -> npm run build` 파이프라인 구성
 - [ ] 실패 시 merge 차단되는 required checks 설정
 - [ ] Vercel Preview Deploy 와 PR 상태 체크 연결
-- [ ] 배포 전 체크리스트 문서화 (env, auth domain, rules, indexes, build)
-- [ ] 운영 배포 runbook 초안 작성 (`docs/deployment.md`)
+- [x] 배포 전 체크리스트 문서화 (env, auth domain, rules, indexes, build)
+- [x] 운영 배포 runbook 초안 작성 ([docs/deployment.md](/Users/moonhyerim/TeamEisenhowerMatrix/docs/deployment.md))
 
 ### Queue 22: 프로덕션 배포 및 운영 검증
 
-- [ ] `main` 브랜치 production auto deploy 연결
+- [x] Vercel CLI 기준 production 수동 배포 완료 (`https://team-eisenhower-matrix.vercel.app`)
+- [x] `main` 브랜치 production auto deploy 연결
 - [ ] 최초 배포 후 smoke test: 로그인, 팀 생성, 초대 링크, 태스크 생성, DnD, 실시간 반영, presence / cursor, i18n
-- [ ] Vercel 로그 / Firebase 콘솔 기반 장애 확인 플로우 정리
-- [ ] 롤백 절차 정리 (Vercel 이전 배포 복구 + Firebase rules 재배포)
-- [ ] 배포 후 모니터링 항목 정리 (에러율, Auth 실패, Firestore quota, RTDB 연결 수)
+- [x] Vercel 로그 / Firebase 콘솔 기반 장애 확인 플로우 정리 (`docs/deployment.md`)
+- [x] 롤백 절차 정리 (Vercel 이전 배포 복구 + Firebase rules 재배포)
+- [x] 배포 후 모니터링 항목 정리 (에러율, Auth 실패, Firestore quota, RTDB 연결 수)
 - [ ] 운영 오픈 체크리스트 완료 시점 정의

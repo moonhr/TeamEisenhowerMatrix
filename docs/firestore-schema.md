@@ -50,6 +50,19 @@ users: 본인만 수정
 
 # Realtime Database 경로 설계
 
+## teamMembers/{teamId}
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| creatorId | string | 팀 생성자 userId |
+| inviteCode | string | 초대 코드 |
+| members/{userId}/active | boolean | RTDB 접근용 멤버십 플래그 |
+| members/{userId}/inviteCode | string | 가입 시 사용한 초대 코드 |
+
+> RTDB rules 에서 `presence`, `cursors` 접근 제한을 검사하기 위한 미러 경로
+> Firestore `teams.memberIds` 와 함께 유지
+> 운영 기준으로는 서버 측 동기화(Cloud Functions/Admin SDK)로 옮기는 것이 더 안전함
+
 ## presence/{teamId}/{userId}
 
 | 필드 | 타입 | 설명 |
