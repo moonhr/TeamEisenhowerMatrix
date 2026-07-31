@@ -17,17 +17,23 @@ export default function JoinPage({ params }: { params: Promise<{ code: string }>
   const [status, setStatus] = useState<'loading' | 'found' | 'notfound' | 'joining'>('loading')
 
   useEffect(() => {
-    getTeamByInviteCode(code).then((t) => {
-      if (t) { setTeam(t); setStatus('found') }
-      else setStatus('notfound')
-    })
+    getTeamByInviteCode(code)
+      .then((t) => {
+        if (t) { setTeam(t); setStatus('found') }
+        else setStatus('notfound')
+      })
+      .catch(() => setStatus('notfound'))
   }, [code])
 
   const handleJoin = async () => {
     if (!team) return
     setStatus('joining')
-    await addMember(team.id, currentUser.id)
-    router.push(`/team/${team.id}`)
+    try {
+      await addMember(team.id, currentUser.id)
+      router.push(`/team/${team.id}`)
+    } catch {
+      setStatus('found')
+    }
   }
 
   if (status === 'loading') {

@@ -282,7 +282,9 @@
     "loading": "チーム情報を読み込み中...",
     "readOnlyBanner": "過去週の閲覧モードです。編集はできません。",
     "backToCurrentWeek": "今週に戻る",
-    "emptyWeek": "選択した週にはタスクがありません。"
+    "emptyWeek": "選択した週にはタスクがありません。",
+    "notAMember": "このチームのメンバーではありません。ルームのメンバーに招待コードを聞いてください。招待コードはルーム右上にあります。",
+    "goHome": "ホームへ"
   },
   "Week": {
     "label": "{year}年{month}月第{week}週"

@@ -167,7 +167,8 @@ service cloud.firestore {
     }
 
     match /teams/{teamId} {
-      allow read: if isTeamMember(resource.data);
+      allow get: if isTeamMember(resource.data);
+      allow list: if signedIn();
       allow create: if signedIn() && validTeamCreate();
       allow update: if validSelfJoin() || validSelfLeave() || validCreatorManagedUpdate() || validMemberManagedUpdate();
       allow delete: if isTeamCreator(resource.data);

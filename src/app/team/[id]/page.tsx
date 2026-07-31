@@ -4,6 +4,7 @@ import { use, useEffect, useState } from 'react'
 import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { Button } from '@/components/ui/button'
 import TeamHeader from '@/components/team/TeamHeader'
 import DroppableTaskSidebar from '@/components/team/DroppableTaskSidebar'
 import DndMatrixCanvas from '@/components/team/DndMatrixCanvas'
@@ -69,6 +70,7 @@ export default function TeamPage({
 
   const [team, setTeam] = useState<Team | null>(null)
   const [members, setMembers] = useState<User[]>([])
+  const [notAMember, setNotAMember] = useState(false)
   const [earliestWeekKey, setEarliestWeekKey] = useState<string | null | undefined>(undefined)
   const [modalOpen, setModalOpen] = useState(false)
   const [tagModalOpen, setTagModalOpen] = useState(false)
@@ -89,22 +91,27 @@ export default function TeamPage({
   useEffect(() => {
     let isMounted = true
 
-    Promise.all([getTeam(id), taskRepo.getEarliestWeekKey(id)]).then(async ([nextTeam, earliest]) => {
-      if (!isMounted) return
+    Promise.all([getTeam(id), taskRepo.getEarliestWeekKey(id)])
+      .then(async ([nextTeam, earliest]) => {
+        if (!isMounted) return
 
-      setEarliestWeekKey(earliest)
+        setEarliestWeekKey(earliest)
 
-      if (!nextTeam) {
-        setTeam(null)
-        setMembers([])
-        return
-      }
+        if (!nextTeam) {
+          setTeam(null)
+          setMembers([])
+          return
+        }
 
-      setTeam(nextTeam)
-      const nextMembers = await getUsers(nextTeam.memberIds)
-      if (!isMounted) return
-      setMembers(nextMembers)
-    })
+        setTeam(nextTeam)
+        const nextMembers = await getUsers(nextTeam.memberIds)
+        if (!isMounted) return
+        setMembers(nextMembers)
+      })
+      .catch(() => {
+        if (!isMounted) return
+        setNotAMember(true)
+      })
 
     return () => {
       isMounted = false
@@ -178,6 +185,15 @@ export default function TeamPage({
     setTasks(applyDragEnd(tasks, String(active.id), overId))
     const newPosition: MatrixPosition | null = overId === 'sidebar' ? null : overId
     await taskRepo.updateMatrixPosition(String(active.id), newPosition)
+  }
+
+  if (notAMember) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center gap-4 px-4 text-center">
+        <p className="text-sm text-muted-foreground">{t('notAMember')}</p>
+        <Button variant="ghost" onClick={() => router.push('/')}>{t('goHome')}</Button>
+      </div>
+    )
   }
 
   if (!team) {

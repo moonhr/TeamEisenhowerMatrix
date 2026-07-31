@@ -336,7 +336,9 @@
     "loading": "팀 정보를 불러오는 중...",
     "readOnlyBanner": "이전 주차 보기 모드 — 수정할 수 없습니다.",
     "backToCurrentWeek": "현재 주차로 돌아가기",
-    "emptyWeek": "선택한 주차에 태스크가 없습니다."
+    "emptyWeek": "선택한 주차에 태스크가 없습니다.",
+    "notAMember": "해당 팀 멤버가 아닙니다. 방 멤버에게 초대코드를 요청해주세요. 초대코드는 방의 우측 상단에 있습니다.",
+    "goHome": "홈으로"
   },
   "Week": {
     "label": "{year}년 {month}월 {week}주차"

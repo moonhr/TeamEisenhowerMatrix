@@ -282,7 +282,9 @@
     "loading": "Teaminformationen werden geladen...",
     "readOnlyBanner": "Ansicht einer früheren Woche. Bearbeitung ist deaktiviert.",
     "backToCurrentWeek": "Zur aktuellen Woche zurück",
-    "emptyWeek": "Für die ausgewählte Woche gibt es keine Aufgaben."
+    "emptyWeek": "Für die ausgewählte Woche gibt es keine Aufgaben.",
+    "notAMember": "Du bist kein Mitglied dieses Teams. Bitte frage ein Teammitglied nach dem Einladungscode — er befindet sich oben rechts im Raum.",
+    "goHome": "Zur Startseite"
   },
   "Week": {
     "label": "Woche {week} von {month}/{year}"

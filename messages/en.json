@@ -336,7 +336,9 @@
     "loading": "Loading team information...",
     "readOnlyBanner": "Previous week view mode. Editing is disabled.",
     "backToCurrentWeek": "Back to current week",
-    "emptyWeek": "There are no tasks in the selected week."
+    "emptyWeek": "There are no tasks in the selected week.",
+    "notAMember": "You're not a member of this team. Please ask a team member for the invite code — it's in the top right of the room.",
+    "goHome": "Home"
   },
   "Week": {
     "label": "Week {week} of {month}/{year}"

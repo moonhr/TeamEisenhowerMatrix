@@ -282,7 +282,9 @@
     "loading": "Chargement des informations de l'équipe...",
     "readOnlyBanner": "Mode de consultation d'une semaine précédente. La modification est désactivée.",
     "backToCurrentWeek": "Revenir à la semaine en cours",
-    "emptyWeek": "Il n'y a pas de tâches pour la semaine sélectionnée."
+    "emptyWeek": "Il n'y a pas de tâches pour la semaine sélectionnée.",
+    "notAMember": "Vous n'êtes pas membre de cette équipe. Demandez le code d'invitation à un membre de l'équipe — il se trouve en haut à droite de la salle.",
+    "goHome": "Accueil"
   },
   "Week": {
     "label": "Semaine {week} de {month}/{year}"
