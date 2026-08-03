@@ -19,6 +19,7 @@ export default function RenameTeamModal({ open, currentName, onOpenChange, onRen
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resyncs input with currentName each time the modal opens
     if (open) setName(currentName)
   }, [open, currentName])
 

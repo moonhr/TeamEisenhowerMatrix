@@ -41,6 +41,7 @@ export default function PreviousWeekModal({
 
   useEffect(() => {
     if (!open) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resets the selection each time the modal opens
     setPendingWeekKey(defaultWeekKey)
   }, [defaultWeekKey, open])
 

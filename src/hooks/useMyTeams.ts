@@ -10,6 +10,7 @@ export function useMyTeams(userId: string) {
 
   useEffect(() => {
     if (!userId) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resets loading flag before refetching on userId change
     setLoading(true)
     getTeamsByUser(userId)
       .then(setTeams)

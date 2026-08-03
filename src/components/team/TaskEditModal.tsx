@@ -33,6 +33,7 @@ export default function TaskEditModal({ task, members, priorityTags, onSave, onD
 
   useEffect(() => {
     if (!task) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- loads the selected task's fields into local edit state
     setTitle(task.title)
     setDescription(task.description)
     setAssigneeId(task.assigneeId)

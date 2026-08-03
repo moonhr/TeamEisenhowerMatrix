@@ -29,6 +29,7 @@ export function useSearch(query: string, teams: Team[]) {
     if (timerRef.current) clearTimeout(timerRef.current)
 
     if (!query.trim()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- clears stale results as soon as the query is emptied
       setResults({ tasks: [], teams: [] })
       return
     }

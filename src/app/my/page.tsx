@@ -35,6 +35,7 @@ export default function MyPage() {
 
   useEffect(() => {
     if (!currentUser) { router.replace('/'); return }
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resets loading flag before refetching on user change
     setLoadingTeams(true)
     getTeamsByUser(currentUser.id).then(async (data) => {
       setTeams(data)
