@@ -1,5 +1,5 @@
 import {
-  collection, doc, addDoc, updateDoc, deleteDoc,
+  collection, doc, addDoc, updateDoc, deleteDoc, writeBatch,
   query as firestoreQuery, where, orderBy, limit, getDocs, onSnapshot,
   serverTimestamp, type Unsubscribe,
 } from 'firebase/firestore'
@@ -17,6 +17,21 @@ export async function getTasksByWeek(teamId: string, weekKey: string): Promise<T
   )
   const snap = await getDocs(q)
   return snap.docs.map((d) => toTask(d.id, d.data()))
+}
+
+export async function rolloverIncompleteTasks(teamId: string, currentWeekKey: string): Promise<void> {
+  const q = firestoreQuery(
+    collection(db, COL),
+    where('teamId', '==', teamId),
+    where('status', '==', 'todo'),
+    where('weekKey', '<', currentWeekKey)
+  )
+  const snap = await getDocs(q)
+  if (snap.empty) return
+
+  const batch = writeBatch(db)
+  snap.docs.forEach((d) => batch.update(d.ref, { weekKey: currentWeekKey, matrixPosition: null }))
+  await batch.commit()
 }
 
 export async function getEarliestWeekKey(teamId: string): Promise<string | null> {

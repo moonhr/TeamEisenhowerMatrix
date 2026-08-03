@@ -174,10 +174,19 @@ service cloud.firestore {
       allow delete: if isTeamCreator(resource.data);
     }
 
+    function validTaskWeekRollover() {
+      return resource.data.status == 'todo'
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['weekKey', 'matrixPosition'])
+        && request.resource.data.weekKey is string
+        && request.resource.data.weekKey > resource.data.weekKey
+        && request.resource.data.matrixPosition == null;
+    }
+
     match /tasks/{taskId} {
       allow read: if isTeamMemberById(resource.data.teamId);
       allow create: if isTeamMemberById(request.resource.data.teamId) && validTaskCreate();
-      allow update: if isTeamMemberById(resource.data.teamId) && validTaskUpdate();
+      allow update: if isTeamMemberById(resource.data.teamId)
+        && (validTaskUpdate() || validTaskWeekRollover());
       allow delete: if isTeamMemberById(resource.data.teamId);
     }
   }

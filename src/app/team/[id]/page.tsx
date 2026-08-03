@@ -119,6 +119,10 @@ export default function TeamPage({
   }, [id])
 
   useEffect(() => {
+    taskRepo.rolloverIncompleteTasks(id, currentWeekKey).catch(() => {})
+  }, [id, currentWeekKey])
+
+  useEffect(() => {
     if (earliestWeekKey === undefined) return
 
     const currentUrlWeekKey = requestedWeekKey
