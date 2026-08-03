@@ -5,28 +5,34 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { getTeamByInviteCode, addMember } from '@/lib/firebase/teamRepository'
-import { useCurrentUser } from '@/lib/auth'
+import { useAuth } from '@/lib/auth'
 import type { Team } from '@/types'
 
 export default function JoinPage({ params }: { params: Promise<{ code: string }> }) {
   const t = useTranslations('JoinCodePage')
   const { code } = use(params)
-  const currentUser = useCurrentUser()
+  const { currentUser, loading: authLoading } = useAuth()
   const router = useRouter()
   const [team, setTeam] = useState<Team | null>(null)
   const [status, setStatus] = useState<'loading' | 'found' | 'notfound' | 'joining'>('loading')
 
   useEffect(() => {
+    if (authLoading) return
+    if (!currentUser) {
+      router.replace(`/login?redirect=${encodeURIComponent(`/join/${code}`)}`)
+      return
+    }
+
     getTeamByInviteCode(code)
       .then((t) => {
         if (t) { setTeam(t); setStatus('found') }
         else setStatus('notfound')
       })
       .catch(() => setStatus('notfound'))
-  }, [code])
+  }, [authLoading, currentUser, code, router])
 
   const handleJoin = async () => {
-    if (!team) return
+    if (!team || !currentUser) return
     setStatus('joining')
     try {
       await addMember(team.id, currentUser.id)
@@ -36,7 +42,7 @@ export default function JoinPage({ params }: { params: Promise<{ code: string }>
     }
   }
 
-  if (status === 'loading') {
+  if (authLoading || !currentUser || status === 'loading') {
     return <div className="flex h-screen items-center justify-center text-sm text-muted-foreground">{t('loading')}</div>
   }
 
