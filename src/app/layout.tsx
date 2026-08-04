@@ -7,6 +7,7 @@ import './globals.css'
 import { AuthProvider } from '@/lib/auth'
 import ThemeApplier from '@/components/ThemeApplier'
 import AuthGuard from '@/components/AuthGuard'
+import { SITE_URL } from '@/lib/site'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -19,11 +20,24 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Team Eisenhower Matrix',
-  description: '팀 우선순위 관리 서비스',
+  description: '팀이 함께 할일을 작성하고 아이젠하워 매트릭스로 우선순위를 관리하는 실시간 협업 이슈관리 서비스',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title: 'Team Eisenhower Matrix',
+    description: '팀이 함께 할일을 작성하고 아이젠하워 매트릭스로 우선순위를 관리하는 실시간 협업 이슈관리 서비스',
+    siteName: 'Team Eisenhower Matrix',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Team Eisenhower Matrix',
+    description: '팀이 함께 할일을 작성하고 아이젠하워 매트릭스로 우선순위를 관리하는 실시간 협업 이슈관리 서비스',
   },
 }
 
