@@ -211,6 +211,7 @@ export default function TeamPage({
   return (
     <div className="flex h-screen flex-col">
       <TeamHeader
+        teamId={id}
         teamName={team.name}
         weekKey={viewWeekKey}
         inviteCode={team.inviteCode}

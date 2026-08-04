@@ -155,7 +155,8 @@
     "previousWeek": "Vorherige Woche",
     "home": "Start",
     "tags": "Tags verwalten",
-    "thisWeek": "Diese Woche"
+    "thisWeek": "Diese Woche",
+    "history": "Erledigt-Verlauf"
   },
   "PreviousWeekModal": {
     "title": "Frühere Wochen durchsuchen",
@@ -288,5 +289,11 @@
   },
   "Week": {
     "label": "Woche {week} von {month}/{year}"
+  },
+  "TeamHistoryPage": {
+    "subtitle": "Erledigt-Verlauf",
+    "back": "Zurück zum Team",
+    "loading": "Verlauf wird geladen...",
+    "empty": "Noch keine erledigten Aufgaben."
   }
 }

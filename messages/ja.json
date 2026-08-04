@@ -155,7 +155,8 @@
     "previousWeek": "前の週",
     "home": "ホーム",
     "tags": "タグ管理",
-    "thisWeek": "今週"
+    "thisWeek": "今週",
+    "history": "完了履歴"
   },
   "PreviousWeekModal": {
     "title": "過去の週を見る",
@@ -288,5 +289,11 @@
   },
   "Week": {
     "label": "{year}年{month}月第{week}週"
+  },
+  "TeamHistoryPage": {
+    "subtitle": "完了履歴",
+    "back": "チームに戻る",
+    "loading": "履歴を読み込み中...",
+    "empty": "完了したタスクはまだありません。"
   }
 }

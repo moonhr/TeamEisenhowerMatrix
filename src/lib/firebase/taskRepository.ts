@@ -34,6 +34,17 @@ export async function rolloverIncompleteTasks(teamId: string, currentWeekKey: st
   await batch.commit()
 }
 
+export async function getCompletedTasks(teamId: string): Promise<Task[]> {
+  const q = firestoreQuery(
+    collection(db, COL),
+    where('teamId', '==', teamId),
+    where('status', '==', 'done'),
+    orderBy('createdAt', 'desc')
+  )
+  const snap = await getDocs(q)
+  return snap.docs.map((d) => toTask(d.id, d.data()))
+}
+
 export async function getEarliestWeekKey(teamId: string): Promise<string | null> {
   const q = firestoreQuery(
     collection(db, COL),

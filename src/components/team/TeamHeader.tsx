@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { ChevronLeft, Link2, House, Check, Tags } from 'lucide-react'
+import { ChevronLeft, Link2, House, Check, Tags, History } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { weekKeyToDisplay, type WeekLocale } from '@/lib/utils/week'
 import { generateInviteLink } from '@/lib/utils/invite'
 
 type TeamHeaderProps = {
+  teamId: string
   teamName: string
   weekKey: string
   inviteCode?: string
@@ -17,6 +18,7 @@ type TeamHeaderProps = {
 }
 
 export default function TeamHeader({
+  teamId,
   teamName,
   weekKey,
   inviteCode,
@@ -54,6 +56,11 @@ export default function TeamHeader({
           <Button variant="ghost" size="icon" onClick={onManageTags} className="h-8 w-8" aria-label={t('tags')}>
             <Tags className="h-4 w-4" />
           </Button>
+          <Link href={`/team/${teamId}/history`} aria-label={t('history')}>
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <History className="h-4 w-4" />
+            </Button>
+          </Link>
           <Button variant="ghost" size="sm" onClick={onPreviousWeek} aria-label={t('previousWeek')}>
             <ChevronLeft className="h-4 w-4" />
             <span className="hidden sm:inline">{t('previousWeek')}</span>

@@ -155,7 +155,8 @@
     "previousWeek": "Semaine précédente",
     "home": "Accueil",
     "tags": "Gérer les étiquettes",
-    "thisWeek": "Cette semaine"
+    "thisWeek": "Cette semaine",
+    "history": "Historique des tâches terminées"
   },
   "PreviousWeekModal": {
     "title": "Parcourir les semaines précédentes",
@@ -288,5 +289,11 @@
   },
   "Week": {
     "label": "Semaine {week} de {month}/{year}"
+  },
+  "TeamHistoryPage": {
+    "subtitle": "Historique des tâches terminées",
+    "back": "Retour à l'équipe",
+    "loading": "Chargement de l'historique...",
+    "empty": "Aucune tâche terminée pour le moment."
   }
 }

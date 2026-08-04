@@ -209,7 +209,8 @@
     "previousWeek": "Previous Week",
     "home": "Home",
     "tags": "Manage tags",
-    "thisWeek": "This week"
+    "thisWeek": "This week",
+    "history": "Completed history"
   },
   "PreviousWeekModal": {
     "title": "Browse previous weeks",
@@ -342,5 +343,11 @@
   },
   "Week": {
     "label": "Week {week} of {month}/{year}"
+  },
+  "TeamHistoryPage": {
+    "subtitle": "Completed history",
+    "back": "Back to team",
+    "loading": "Loading history...",
+    "empty": "No completed tasks yet."
   }
 }

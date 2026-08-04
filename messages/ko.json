@@ -209,7 +209,8 @@
     "previousWeek": "Previous Week",
     "home": "홈으로",
     "tags": "태그 관리",
-    "thisWeek": "이번 주"
+    "thisWeek": "이번 주",
+    "history": "완료 히스토리"
   },
   "PreviousWeekModal": {
     "title": "이전 주차 보기",
@@ -342,5 +343,11 @@
   },
   "Week": {
     "label": "{year}년 {month}월 {week}주차"
+  },
+  "TeamHistoryPage": {
+    "subtitle": "완료 히스토리",
+    "back": "팀으로 돌아가기",
+    "loading": "히스토리를 불러오는 중...",
+    "empty": "완료된 태스크가 없습니다."
   }
 }
